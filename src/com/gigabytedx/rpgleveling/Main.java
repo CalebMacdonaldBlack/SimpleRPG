@@ -14,7 +14,6 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.gigabytedx.rpgleveling.Mobs.GetMobData;
 import com.gigabytedx.rpgleveling.events.EnitityDeath;
 import com.gigabytedx.rpgleveling.events.EntitySpawn;
 import com.gigabytedx.rpgleveling.events.Interact;
@@ -27,16 +26,13 @@ import com.gigabytedx.rpgleveling.locations.Regions;
 import com.gigabytedx.rpgleveling.modifiers.GetBuffs;
 import com.gigabytedx.rpgleveling.modifiers.Modifier;
 import com.gigabytedx.rpgleveling.player.ActiveModifiers;
-import com.gigabytedx.rpgleveling.skills.GetSkills;
 
 import commands.GetXP;
 import commands.OpenShop;
-import commands.PrintSkills;
 import commands.SetWalk;
 import commands.ViewItems;
 
 public class Main extends JavaPlugin {
-	public GetSkills skills;
 	public GetLocations locations;
 	public static GetBuffs buffs;
 	public Regions regions = new Regions(this);
@@ -50,7 +46,7 @@ public class Main extends JavaPlugin {
 	public File MobSpawningDataFile = new File(getDataFolder() + "/Data/MobSpawningData.yml");
 	public FileConfiguration MobSpawningData = YamlConfiguration.loadConfiguration(MobSpawningDataFile);
 	
-	public File playerFoundItemsFile = new File(getDataFolder() + "/Data/MobSpawningData.yml");
+	public File playerFoundItemsFile = new File(getDataFolder() + "/Data/playerDataFile.yml");
 	public FileConfiguration playerFoundItemsConfig = YamlConfiguration.loadConfiguration(MobSpawningDataFile);
 
 	public void onEnable() {
@@ -60,9 +56,9 @@ public class Main extends JavaPlugin {
 		registerEvents();
 		registerConfig();
 		logger.info(pdfFile.getName() + " has been enabled (V." + pdfFile.getVersion() + ")");
-		loadFiles(MobSpawningDataFile, MobSpawningData);
+		//loadFiles(MobSpawningDataFile, MobSpawningData);
 		loadFiles(playerFoundItemsFile, playerFoundItemsConfig);
-		new GetMobData(this);
+		//new GetMobData(this);
 	}
 
 	public void onDisable() {
@@ -82,7 +78,6 @@ public class Main extends JavaPlugin {
 	}
 
 	private void registerCommands() {
-		getCommand("printskills").setExecutor(new PrintSkills(this));
 		getCommand("viewitems").setExecutor(new ViewItems(this));
 		getCommand("getxp").setExecutor(new GetXP(this));
 		getCommand("openshop").setExecutor(new OpenShop(this));
@@ -94,12 +89,11 @@ public class Main extends JavaPlugin {
 
 		// get skills from config
 		locations = new GetLocations(this);
-		skills = new GetSkills(this);
 		buffs = new GetBuffs(this);
 		items = new GetItems(this);
 	}
 
-	public void savePlayerExperienceConfig(File file, FileConfiguration fileConfig) {
+	public void saveCustomConfig(File file, FileConfiguration fileConfig) {
 		try {
 			fileConfig.save(file);
 		} catch (IOException e) {

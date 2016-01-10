@@ -67,6 +67,7 @@ public class GetItems {
 				System.out.println(itemName + " does not have any buffs");
 			}
 			// add new skill to list
+			System.out.println(itemName);
 			items.add(new Item(itemName, lore, cost, type, enchanted, buffs, debuffs, location, damage, protection));
 			Main.itemMap.put(ChatColor.BLUE + itemName,
 					new Item(itemName, lore, cost, type, enchanted, buffs, debuffs, location, damage, protection));

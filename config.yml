@@ -1,120 +1,172 @@
 skills: 
-  SwordsMan:
-    experienceGainedThough:
-      - sword
-    levels:
-      Level0:
-        itemUnlock:
-          - Worn Sword
-        buffs:
-        debuffs:
-        levelNumber: 0
-      Level5:
-        itemUnlock:
-          - Hardy Sword
-          - Shoddy Iron Helmet
-          - Shoddy Iron Body
-          - Shoddy Iron Legs
-          - Shoddy Iron Boots
-        buffs:
-        debuffs:
-        levelNumber: 10
-      Level10:
-        itemUnlock:
-          - Trusty Sword
-          - Worn Iron Helmet
-          - Worn Iron Body
-          - Worn Iron Legs
-          - Worn Iron Boots
-        buffs:
-        debuffs:
-        levelNumber: 5
-      Level15:
-        itemUnlock:
-          - Robust Sword
-        buffs:
-        debuffs:
-        levelNumber: 15
-  Archer:
-    experienceGainedThough:
-      - Bow
-    levels:
-      Level0:
-        itemUnlock:
-          - Worn Bow
-        buffs:
-        debuffs:
-        levelNumber: 0
-      Level5:
-        itemUnlock:
-          - Hardy Bow
-          - Shoddy Leather Helmet
-          - Shoddy Leather Body
-          - Shoddy Leather Legs
-          - Shoddy Leather Boots
-        buffs:
-        debuffs:
-        levelNumber: 5
-      Level10:
-        itemUnlock:
-          - Trusty Bow
-          - Worn Leather Helmet
-          - Worn Leather Body
-          - Worn Leather Legs
-          - Worn Leather Boots
-        buffs:
-        debuffs:
-        levelNumber: 10
-      Level15:
-        itemUnlock:
-          - Robust Bow
-        buffs:
-        debuffs:
-        levelNumber: 15
-  ImprovisedCombat:
-    experienceGainedThough:
-      - axe
-    levels:
-      level0:
-        itemUnlock:
-          - Worn Axe
-          - Worn Pickaxe
-        buffs:
-        debuffs:
-        levelNumber: 0
-      level5:
-        itemUnlock:
-          - Hardy Pick
-          - Hardy Axe
-          - Shoddy Chain Helmet
-          - Shoddy Chain Body
-          - Shoddy Chain Legs
-          - Shoddy Chain Boots
-        buffs:
-        debuffs:
-        levelNumber: 5
-      level10:
-        itemUnlock:
-          - Trusty Pick
-          - Trusty Axe
-          - Worn Chain Helmet
-          - Worn Chain Body
-          - Worn Chain Legs
-          - Worn Chain Boots
-        buffs:
-        debuffs:
-        levelNumber: 10
-      level15:
-        itemUnlock:
-          - Trusty Pick
-          - Trusty Axe
-        buffs:
-        debuffs:
-        levelNumber: 15
-  Agility:
+  Tank:
+    items:
+     - Longsword
+     - Broadsword
+     - Claymore
+     - Diamond Helmet
+     - Diamond Chestplate
+     - Diamond Leggings
+     - Diamond Boots
+  Healer:
+    items:
+      - Leather Helmet
+      - Leather Chestplate
+      - Leather Leggings
+      - Leather Boots
+      - Klamath Dagger
+  DPS:
+    items:
+      - Klamath Scimitar
+      - Iron Helmet
+      - Iron Chestplate
+      - Iron Leggings
+      - Iron Boots
+  Bard:
+    items:
+      - Boarding Axe
+      - Chain Helmet
+      - Chain Chestplate
+      - Chain Leggings
+      - Chain Boots
 Items:
+  Leather Helmet:
+    Location: spawn
+    Type: LEATHER_HELMET
+    Lore: An old, damaged helmet, It'll do though.
+    Enchanted: false
+    Cost: 10
+    Buffs:
+    Debuffs:
+    Protection: 3
+  Leather Body:
+    Location: spawn
+    Type: LEATHER_CHESTPLATE
+    Lore: An old, damaged chestpiece. It'll do though.
+    Enchanted: false
+    Cost: 25
+    Buffs:
+    Debuffs:
+    Protection: 3
+  Leather Legs:
+    Location: spawn
+    Type: LEATHER_LEGGINGS
+    Lore: An old, damaged set of legs. It'll do though.
+    Enchanted: false
+    Cost: 15
+    Buffs:
+    Debuffs:
+    Protection: 3
+  Leather Boots:
+    Location: spawn
+    Type: LEATHER_BOOTS
+    Lore: An old, damaged set of boots. It'll do though.
+    Enchanted: false
+    Cost: 10
+    Buffs:
+    Debuffs:
+    Protection: 3
+  Iron Helmet:
+    Location: spawn
+    Type: IRON_HELMET
+    Lore: An old, damaged helmet, It'll do though.
+    Enchanted: false
+    Cost: 10 
+    Buffs:
+    Debuffs:
+    Protection: 3
+  Iron Body:
+    Location: spawn
+    Type: IRON_CHESTPLATE
+    Lore: An old, damaged chestpiece. It'll do though.
+    Enchanted: false
+    Cost: 25
+    Buffs:
+    Debuffs:
+    Protection: 3
+  Iron Legs:
+    Location: spawn
+    Type: IRON_LEGGINGS
+    Lore: An old, damaged set of legs. It'll do though.
+    Enchanted: false
+    Cost: 15
+    Buffs:
+    Debuffs:
+    Protection: 3
+  Iron Boots:
+    Location: spawn
+    Type: IRON_BOOTS
+    Lore: An old, damaged set of boots. It'll do though.
+    Enchanted: false
+    Cost: 10
+    Buffs:
+    Debuffs:
+    Protection: 3
+  Diamond Helmet:
+    Location: spawn
+    Type: DIAMOND_HELMET
+    Lore: An old, damaged helmet, It'll do though.
+    Enchanted: false
+    Cost: 10 
+    Buffs:
+    Debuffs:
+    Protection: 3
+  Diamond Body:
+    Location: spawn
+    Type: DIAMOND_CHESTPLATE
+    Lore: An old, damaged chestpiece. It'll do though.
+    Enchanted: false
+    Cost: 25
+    Buffs:
+    Debuffs:
+    Protection: 3
+  Diamond Legs:
+    Location: spawn
+    Type: DIAMOND_LEGGINGS
+    Lore: An old, damaged set of legs. It'll do though.
+    Enchanted: false
+    Cost: 15
+    Buffs:
+    Debuffs:
+    Protection: 3
+  Diamond Boots:
+    Location: spawn
+    Type: DIAMOND_BOOTS
+    Lore: An old, damaged set of boots. It'll do though.
+    Enchanted: false
+    Cost: 10
+    Buffs:
+    Debuffs:
+    Protection: 3
+  Chain Helmet:
+    Location: spawn
+    Type: CHAINMAIL_HELMET
+    Lore: An old, damaged helmet, It'll do though.
+    Enchanted: false
+    Cost: 10 
+    Buffs:
+    Debuffs:
+    Protection: 3
+  Chain Body:
+    Location: spawn
+    Type: CHAINMAIL_CHESTPLATE
+    Lore: An old, damaged chestpiece. It'll do though.
+    Enchanted: false
+    Cost: 25
+    Buffs:
+    Debuffs:
+    Protection: 3
+  Chain Legs:
+    Location: spawn
+    Type: CHAINMAIL_LEGGINGS
+    Lore: 
+    Enchanted: false
+    Cost: 15
+    Buffs:
+    Debuffs:
+    Protection: 3
   Boarding Axe:
-    Location: Blithe-water
+    Location: spawn
     Type: IRON_AXE
     Lore: A brutal axe once used with deadly efficiency by sailors
     Enchanted: true
@@ -123,417 +175,8 @@ Items:
     Debuffs:
       - Slowness1
     Damage: 5
-  Fishing Rod:
-    Location: Blithe-water
-    Type: FISHING_ROD
-    Lore: A simple wooden fishing rod
-    Enchanted: false
-    Cost: 40
-    Buffs:
-    Debuffs:
-    Damage: 1
-  Worn Sword:
-    Location: Staryiron
-    Type: WOOD_SWORD
-    Lore: A used, worn sword. Cheap and cheerful.
-    Enchanted: false
-    Cost: 15
-    Buffs:
-    Debuffs:
-    Damage: 4
-  Worn Bow:
-    Location: Staryiron
-    Type: BOW
-    Lore: A used, worn bow. Cheap and cheerful
-    Enchanted: false
-    Cost: 15
-    Buffs:
-    Debuffs:
-    Damage: 4
-  Worn Axe:
-    Location: Staryiron
-    Type: IRON_AXE
-    Lore: A used, worn axe. Cheap and cheerful
-    Enchanted: false
-    Cost: 15
-    Buffs:
-    Debuffs:
-    Damage: 3
-  Worn Pickaxe:
-    Location: Staryiron
-    Type: IRON_PICKAXE
-    Lore: A used worn pickaxe. Cheap and cheerful
-    Enchanted: false
-    Cost: 15
-    Buffs:
-    Debuffs:
-    Damage: 3
-  Trusty Sword:
-    Location: Erzquarry
-    Type: IRON_SWORD
-    Lore: A well crafted but slightly dented blade.
-    Enchanted: false
-    Cost: 100
-    Buffs:
-    Debuffs:
-    Damage: 6
-  Trusty Bow:
-    Location: Erzquarry
-    Type: BOW
-    Lore: A well crafted but slightly dented bow.
-    Enchanted: false
-    Cost: 100
-    Buffs:
-    Debuffs:
-    Damage: 6
-  Trusty Axe:
-    Location: Erzquarry
-    Type: IRON_AXE
-    Lore: A well crafted but slightly dented axe.
-    Enchanted: false
-    Cost: 100
-    Buffs:
-    Debuffs:
-    Damage: 5
-  Trusty Pickaxe:
-    Location: Erzquarry
-    Type: IRON_PICKAXE
-    Lore: A well crafted but slightly dented pickaxe.
-    Enchanted: false
-    Cost: 100
-    Buffs:
-    Debuffs:
-    Damage: 5
-  Robust Sword:
-    Location: Blithe-water
-    Type: IRON_SWORD
-    Lore: A fine blade of decent metal.
-    Enchanted: false
-    Cost: 255
-    Buffs:
-    Debuffs:
-    Damage: 6
-  Robust Bow:
-    Location: Blithe-water
-    Type: BOW
-    Lore: A fine bow of decent wood.
-    Enchanted: false
-    Cost: 255
-    Buffs:
-    Debuffs:
-    Damage: 6
-  Robust Axe:
-    Location: Blithe-water
-    Type: IRON_AXE
-    Lore: A fine axe of decent metal.
-    Enchanted: false
-    Cost: 255
-    Buffs:
-    Debuffs:
-    Damage: 5
-  Robust Pickaxe:
-    Location: Blithe-water
-    Type: IRON_PICKAXE
-    Lore: A fine pickaxe of decent metal.
-    Enchanted: false
-    Cost: 255
-    Buffs:
-    Debuffs:
-    Damage: 5
-  Shoddy Leather Helmet:
-    Location: Staryiron
-    Type: LEATHER_HELMET
-    Lore: An old, damaged helmet, It'll do though.
-    Enchanted: false
-    Cost: 10
-    Buffs:
-    Debuffs:
-  Shoddy Leather Body:
-    Location: Staryiron
-    Type: LEATHER_CHESTPLATE
-    Lore: An old, damaged chestpiece. It'll do though.
-    Enchanted: false
-    Cost: 25
-    Buffs:
-    Debuffs:
-  Shoddy Leather Legs:
-    Location: Staryiron
-    Type: LEATHER_LEGGINGS
-    Lore: An old, damaged set of legs. It'll do though.
-    Enchanted: false
-    Cost: 15
-    Buffs:
-    Debuffs:
-  Shoddy Leather Boots:
-    Location: Staryiron
-    Type: LEATHER_BOOTS
-    Lore: An old, damaged set of boots. It'll do though.
-    Enchanted: false
-    Cost: 10
-    Buffs:
-    Debuffs:
-  Shoddy Iron Helmet:
-    Location: Staryiron
-    Type: IRON_HELMET
-    Lore: An old, damaged helmet, It'll do though.
-    Enchanted: false
-    Cost: 10 
-    Buffs:
-    Debuffs:
-  Shoddy Iron Body:
-    Location: Staryiron
-    Type: IRON_CHESTPLATE
-    Lore: An old, damaged chestpiece. It'll do though.
-    Enchanted: false
-    Cost: 25
-    Buffs:
-    Debuffs:
-  Shoddy Iron Legs:
-    Location: Staryiron
-    Type: IRON_LEGGINGS
-    Lore: An old, damaged set of legs. It'll do though.
-    Enchanted: false
-    Cost: 15
-    Buffs:
-    Debuffs:
-  Shoddy Iron Boots:
-    Location: Staryiron
-    Type: IRON_BOOTS
-    Lore: An old, damaged set of boots. It'll do though.
-    Enchanted: false
-    Cost: 10
-    Buffs:
-    Debuffs:
-  Shoddy Chain Helmet:
-    Location: Staryiron
-    Type: CHAINMAIL_HELMET
-    Lore: An old, damaged helmet, It'll do though.
-    Enchanted: false
-    Cost: 10 
-    Buffs:
-    Debuffs:
-  Shoddy Chain Body:
-    Location: Staryiron
-    Type: CHAINMAIL_CHESTPLATE
-    Lore: An old, damaged chestpiece. It'll do though.
-    Enchanted: false
-    Cost: 25
-    Buffs:
-    Debuffs:
-  Shoddy Chain Legs:
-    Location: Staryiron
-    Type: CHAINMAIL_LEGGINGS
-    Lore: 
-    Enchanted: false
-    Cost: 15
-    Buffs:
-    Debuffs:
-  Shoddy Chain Boots:
-    Location: Staryiron
-    Type: CHAINMAIL_BOOTS
-    Lore: An old, damaged set of boots. It'll do though.
-    Enchanted: false
-    Cost: 10
-    Buffs:
-    Debuffs:
-  Worn Leather Helmet:
-    Location: Erzquarry
-    Type: LEATHER_HELMET
-    Lore: A well worn helmet.
-    Enchanted: false
-    Cost: 35
-    Buffs:
-    Debuffs:
-  Worn Leather Body:
-    Location: Erzquarry
-    Type: LEATHER_CHESTPLATE
-    Lore: A well worn chestpiece.
-    Enchanted: false
-    Cost: 50
-    Buffs:
-    Debuffs:
-  Worn Leather Legs:
-    Location: Erzquarry
-    Type: LEATHER_LEGGINGS
-    Lore: Some well worn legs.
-    Enchanted: false
-    Cost: 45
-    Buffs:
-    Debuffs:
-  Worn Leather Boots:
-    Location: Erzquarry
-    Type: LEATHER_BOOTS
-    Lore: A pair of well worn boots.
-    Enchanted: false
-    Cost: 35
-    Buffs:
-    Debuffs:
-  Worn Iron Helmet:
-    Location: Erzquarry
-    Type: IRON_HELMET
-    Lore: A well worn helmet.
-    Enchanted: false
-    Cost: 35 
-    Buffs:
-    Debuffs:
-  Worn Iron Body:
-    Location: Erzquarry
-    Type: IRON_CHESTPLATE
-    Lore: A well worn chestpiece.
-    Enchanted: false
-    Cost: 50
-    Buffs:
-    Debuffs:
-  Worn Iron Legs:
-    Location: Erzquarry
-    Type: IRON_LEGGINGS
-    Lore: Some well worn legs.
-    Enchanted: false
-    Cost: 45
-    Buffs:
-    Debuffs:
-  Worn Iron Boots:
-    Location: Erzquarry
-    Type: IRON_BOOTS
-    Lore: A pair of well worn boots.
-    Enchanted: false
-    Cost: 35
-    Buffs:
-    Debuffs:
-  Worn Chain Helmet:
-    Location: Erzquarry
-    Type: CHAINMAIL_HELMET
-    Lore: A well worn helmet.
-    Enchanted: false
-    Cost: 35
-    Buffs:
-    Debuffs:
-  Worn Chain Body:
-    Location: Erzquarry
-    Type: CHAINMAIL_CHESTPLATE
-    Lore: A well worn chestpiece.
-    Enchanted: false
-    Cost: 50
-    Buffs:
-    Debuffs:
-  Worn Chain Legs:
-    Location: Erzquarry
-    Type: CHAINMAIL_LEGGINGS
-    Lore: Some well worn legs.
-    Enchanted: false
-    Cost: 45
-    Buffs:
-    Debuffs:
-  Worn Chain Boots:
-    Location: Erzquarry
-    Type: CHAINMAIL_BOOTS
-    Lore: A pair of well worn boots.
-    Enchanted: false
-    Cost: 35
-    Buffs:
-    Debuffs:
-  Purple Shirt:
-    Location: Blithe-water
-    Type: LEATHER_CHESTPLATE
-    Lore: A fancy purple shirt made with fine exported fabric.
-    Enchanted: false
-    Cost: 75 
-    Buffs:
-    Debuffs:
-  Red Shirt:
-    Location: Blithe-water
-    Type: LEATHER_CHESTPLATE
-    Lore: A fancy red shirt made with fine exported fabric.
-    Enchanted: false
-    Cost: 75
-    Buffs:
-    Debuffs:
-  Green Shirt:
-    Location: Blithe-water
-    Type: LEATHER_CHESTPLATE
-    Lore: A fancy green shirt made with fine exported fabric.
-    Enchanted: false
-    Cost: 75
-    Buffs:
-    Debuffs:
-  Blue Shirt:
-    Location: Blithe-water
-    Type: LEATHER_CHESTPLATE
-    Lore: A fancy blue shirt made with fine exported fabric.
-    Enchanted: false
-    Cost: 75
-    Buffs:
-    Debuffs:
-  Purple Boots:
-    Location: Blithe-water
-    Type: LEATHER_BOOTS
-    Lore: A pair of fine purple boots from aboard.
-    Enchanted: false
-    Cost: 50 
-    Buffs:
-    Debuffs:
-  Red Boots:
-    Location: Blithe-water
-    Type: LEATHER_BOOTS
-    Lore: A pair of fine red boots from aboard.
-    Enchanted: false
-    Cost: 50
-    Buffs:
-    Debuffs:
-  Green Boots:
-    Location: Blithe-water
-    Type: LEATHER_BOOTS
-    Lore: A pair of fine green boots from aboard.
-    Enchanted: false
-    Cost: 50
-    Buffs:
-    Debuffs:
-  Blue Boots:
-    Location: Blithe-water
-    Type: CHAINMAIL_BOOTS
-    Lore: A pair of fine blue boots from aboard.
-    Enchanted: false
-    Cost: 50
-    Buffs:
-    Debuffs:
-  Hardy Sword:
-    Location: NotAssigned
-    Type: IRON_SWORD
-    Lore: 
-    Enchanted: false
-    Cost: 50
-    Buffs:
-    Debuffs:
-    Damage: 5
-  Hardy Bow:
-    Location: NotAssigned
-    Type: BOW
-    Lore: 
-    Enchanted: false
-    Cost: 50
-    Buffs:
-    Debuffs:
-    Damage: 5
-  Hardy Pick:
-    Location: NotAssigned
-    Type: IRON_PICKAXE
-    Lore: 
-    Enchanted: false
-    Cost: 50
-    Buffs:
-    Debuffs:
-    Damage: 4
-  Hardy Axe:
-    Location: NotAssigned
-    Type: IRON_AXE
-    Lore: 
-    Enchanted: false
-    Cost: 50
-    Buffs:
-    Debuffs:
-    Damage: 4
   Klamath Dagger:
-    Location: Blithe-water
+    Location: spawn
     Type: STONE_SWORD
     Lore: A foreign dagger made of stone. 
     Enchanted: true
@@ -543,7 +186,7 @@ Items:
     Debuffs:
     Damage: 5
   Klamath Scimitar:
-    Location: Blithe-water
+    Location: spawn
     Type: STONE_SWORD
     Lore: A scimitar made of stone.
     Enchanted: true
@@ -553,7 +196,7 @@ Items:
     Debuffs:
     Damage: 7
   Longsword:
-    Location: Blithe-water
+    Location: spawn
     Type: IRON_SWORD
     Lore: A long blade of shining steel.
     Enchanted: true
@@ -563,7 +206,7 @@ Items:
      - Slowness1
     Damage: 9
   Broadsword:
-    Location: Blithe-water
+    Location: spawn
     Type: IRON_SWORD
     Lore: A brutal thick blade thats extremely heavy.
     Enchanted: true
@@ -573,6 +216,7 @@ Items:
      - Slowness2
     Damage: 12
   Claymore:
+    Location: spawn
     Type: IRON_SWORD
     Location:
     Lore: This is a rusty iron sword crafted by a young blacksmith apprentice. It doesn't do much damage but you can tell the poor kid put hit heart and soul into it
@@ -711,7 +355,7 @@ Debuffs:
     Target: player
     Trigger: hold
 Locations:
-  Staryiron:
+  spawn:
     testoption: false
   Blithe-water:
     testoption: false

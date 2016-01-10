@@ -18,7 +18,7 @@ public class AddItemToInventory {
 	public static Inventory addItem(Inventory inv, Item item, Main plugin, boolean obtainable) {
 
 		if (!obtainable) {
-			ItemStack itemStack = new ItemStack(Material.STAINED_GLASS_PANE);
+			ItemStack itemStack = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14 );
 			ItemMeta meta = itemStack.getItemMeta();
 
 			meta.setDisplayName(ChatColor.BLACK + "Undiscovered");

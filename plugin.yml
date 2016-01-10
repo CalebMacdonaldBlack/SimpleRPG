@@ -1,6 +1,13 @@
 name: GigabyteMMO
-main: com.gigabytedx.gigabytemmo.Main
+main: com.gigabytedx.rpgleveling.Main
 version: 1.0
 commands:
   printskills:
     description: print out skills and info to player 
+  getxp:
+    description: unused
+  openshop:
+  printskills:
+  viewitems:
+  setwalk:
+      
