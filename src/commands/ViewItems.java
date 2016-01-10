@@ -15,7 +15,7 @@ import com.gigabytedx.rpgleveling.item.AddItemToInventory;
 import com.gigabytedx.rpgleveling.item.Item;
 
 public class ViewItems implements CommandExecutor {
-	
+
 	Main plugin;
 
 	public ViewItems(Main plugin) {
@@ -28,10 +28,35 @@ public class ViewItems implements CommandExecutor {
 			Player player = (Player) sender;
 			List<Item> items = plugin.items.getItems();
 			player.sendMessage("size of items is: " + items.size());
-			Inventory inv = Bukkit.createInventory(player, 27,ChatColor.DARK_BLUE + "All available items");
+			Inventory inv = Bukkit.createInventory(player, 27, ChatColor.DARK_BLUE + "All available items");
+			
 			for (Item item : items) {
-				inv = AddItemToInventory.addItem(inv, item, plugin, true);
+				try {
+					System.out.println(item.getName());
+					System.out.println(
+							plugin.playerFoundItemsConfig.getConfigurationSection("players." + player.getUniqueId())
+									.getList("found items").toString());
+					if (plugin.playerFoundItemsConfig.getConfigurationSection("players." + player.getUniqueId())
+							.getList("found items").contains(item.getName())) {
+						inv = AddItemToInventory.addItem(inv, item, plugin, true, true);
+					}
+				} catch (NullPointerException e) {
+					System.out.println("Doesnt have a location name");
+				}
 			}
+			
+			for (Item item : items) {
+				try {
+					if (!(plugin.playerFoundItemsConfig.getConfigurationSection("players." + player.getUniqueId())
+							.getList("found items").contains(item.getName()))) {
+						inv = AddItemToInventory.addItem(inv, null, plugin, false, true);
+					}
+				} catch (NullPointerException e) {
+					System.out.println("Doesnt have a location name");
+				}
+			}
+
+			
 			player.openInventory(inv);
 		}
 		return false;

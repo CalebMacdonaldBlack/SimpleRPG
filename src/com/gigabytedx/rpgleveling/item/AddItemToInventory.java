@@ -15,14 +15,21 @@ import com.questcraft.itemapi.ItemAPI;
 
 public class AddItemToInventory {
 
-	public static Inventory addItem(Inventory inv, Item item, Main plugin, boolean obtainable) {
+	public static Inventory addItem(Inventory inv, Item item, Main plugin, boolean obtainable, boolean displayLocation) {
 
 		if (!obtainable) {
-			ItemStack itemStack = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14 );
+			ItemStack itemStack = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15);
 			ItemMeta meta = itemStack.getItemMeta();
 
-			meta.setDisplayName(ChatColor.BLACK + "Undiscovered");
+			meta.setDisplayName(ChatColor.DARK_RED + "Undiscovered");
 			itemStack.setItemMeta(meta);
+
+			for (int i = 0; i < inv.getSize(); i++) {
+				if (inv.getItem(i) == null) {
+					inv.setItem(i, itemStack);
+					return inv;
+				}
+			}
 			inv.addItem(itemStack);
 			return inv;
 		}
@@ -91,6 +98,10 @@ public class AddItemToInventory {
 		} else if (item.getProtection() > 0) {
 			lore.add("");
 			lore.add(ChatColor.GREEN + "Armor Protection: " + ChatColor.RED + item.getProtection());
+		}
+		if(displayLocation){
+			lore.add("");
+			lore.add(ChatColor.AQUA + "Location: " + ChatColor.GOLD + item.getLocationName());
 		}
 		meta.setLore(lore);
 		itemStack.setItemMeta(meta);

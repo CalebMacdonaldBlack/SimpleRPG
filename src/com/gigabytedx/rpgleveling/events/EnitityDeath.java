@@ -71,7 +71,7 @@ public class EnitityDeath implements Listener {
 					Drop drop = itemRandomPool.get(randomIndex);
 					if (drop.isCustom()) {
 						AddItemToInventory.addItem(event.getEntity().getKiller().getInventory(),
-								Main.itemMap.get(ChatColor.BLUE + drop.getName()), plugin, true);
+								Main.itemMap.get(ChatColor.BLUE + drop.getName()), plugin, true, false);
 					} else {
 						event.getEntity().getKiller().getInventory()
 								.addItem(new ItemStack(Material.valueOf(drop.getType()), drop.getQty()));

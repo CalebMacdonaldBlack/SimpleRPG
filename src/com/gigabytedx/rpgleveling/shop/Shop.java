@@ -53,18 +53,7 @@ public class Shop {
 				if (plugin.playerFoundItemsConfig.getConfigurationSection("players." + player.getUniqueId())
 						.getList("found items").contains(item.getName())
 						&& item.getLocationName().toLowerCase().equals(location.toLowerCase())) {
-					inv = AddItemToInventory.addItem(inv, item, plugin, true);
-				}
-			} catch (NullPointerException e) {
-				System.out.println("Doesnt have a location name");
-			}
-		}
-		for (Item item : items) {
-			try {
-				if (!(plugin.playerFoundItemsConfig.getConfigurationSection("players." + player.getUniqueId())
-						.getList("found items").contains(item.getName()))
-						&& item.getLocationName().toLowerCase().equals(location.toLowerCase())) {
-					inv = AddItemToInventory.addItem(inv, null, plugin, false);
+					inv = AddItemToInventory.addItem(inv, item, plugin, true, false);
 				}
 			} catch (NullPointerException e) {
 				System.out.println("Doesnt have a location name");
