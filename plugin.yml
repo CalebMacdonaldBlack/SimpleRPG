@@ -1,16 +1,6 @@
-name: GigabyteDXRPGLeveling
-main: com.gigabytedx.rpgleveling.Main
+name: GigabyteMMO
+main: com.gigabytedx.gigabytemmo.Main
 version: 1.0
 commands:
   printskills:
-    description: print out skills and info to player
-  viewitems:
-    description: view items in inventory
-  getxp:
-    description: view amount of xp you have
-  openshop:
-    description: open an inventory with all the items unlocked to that player
-  setskillexperience:
-    description: debugging command to set skill experience of a player   
-  setwalk:
-    description: set walk speed of player      
+    description: print out skills and info to player 
