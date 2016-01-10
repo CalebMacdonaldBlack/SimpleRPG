@@ -17,9 +17,8 @@ public class Shop {
 	public static void openShop(Main plugin, Player player, String location) {
 		List<Item> items = plugin.items.getItems();
 		player.sendMessage("size of items is: " + items.size());
-		Inventory inv = Bukkit.createInventory(player, 27,
+		Inventory inv = Bukkit.createInventory(player, 54,
 				ChatColor.DARK_BLUE + "Shop: " + ChatColor.DARK_BLUE + location);
-		System.out.println(items.toString());
 		for (Item item : items) {
 
 			try {

@@ -42,6 +42,21 @@ public class GetItems {
 			List<Modifier> debuffs = new ArrayList<>();
 			int damage = itemConfSection.getInt("Damage");
 			int protection = itemConfSection.getInt("Protection");
+
+			if (type.equals(Material.POTION)) {
+
+				PotionItem potion = new PotionItem(
+						new Item(itemName, lore, cost, type, enchanted, buffs, debuffs, location, damage, protection),
+						itemConfSection.getBoolean("Enchanted"), itemConfSection.getInt("Potency"),
+						itemConfSection.getInt("Data"), itemConfSection.getBoolean("Splash"),
+						itemConfSection.getInt("Qty"), itemConfSection.getInt("Cooldown"),
+						itemConfSection.getString("Potion Type"));
+
+				items.add(potion);
+				Main.itemMap.put(ChatColor.BLUE + itemName, potion);
+				continue;
+			}
+
 			try {
 
 				for (String buffName : buffNames) {
@@ -67,7 +82,6 @@ public class GetItems {
 				System.out.println(itemName + " does not have any buffs");
 			}
 			// add new skill to list
-			System.out.println(itemName);
 			items.add(new Item(itemName, lore, cost, type, enchanted, buffs, debuffs, location, damage, protection));
 			Main.itemMap.put(ChatColor.BLUE + itemName,
 					new Item(itemName, lore, cost, type, enchanted, buffs, debuffs, location, damage, protection));

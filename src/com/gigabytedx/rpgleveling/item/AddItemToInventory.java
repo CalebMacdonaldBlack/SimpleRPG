@@ -33,10 +33,16 @@ public class AddItemToInventory {
 			inv.addItem(itemStack);
 			return inv;
 		}
-
+		
 		ItemStack itemStack = new ItemStack(item.getType());
+		
+		if(item instanceof PotionItem){
+			itemStack = ((PotionItem) item).getPotion();
+		}
+		
 		ItemMeta meta = itemStack.getItemMeta();
-
+		meta.setDisplayName(ChatColor.BLUE + item.getName());
+		
 		try {
 			if (item.isEnchanted()) {
 				ItemAPI.addGlow(itemStack);
@@ -64,7 +70,7 @@ public class AddItemToInventory {
 			}
 			lore.add(sentence);
 		} catch (NullPointerException e) {
-			System.out.println("No lore");
+			System.out.println("No lore: " + item.getName());
 		}
 		if (item.getBuffs().size() > 0) {
 			lore.add(" ");

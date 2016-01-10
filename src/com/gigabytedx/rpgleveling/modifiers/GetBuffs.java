@@ -10,6 +10,7 @@ import com.gigabytedx.rpgleveling.Main;
 import com.gigabytedx.rpgleveling.modifiers.modifier.Blind;
 import com.gigabytedx.rpgleveling.modifiers.modifier.Chameleon;
 import com.gigabytedx.rpgleveling.modifiers.modifier.DamageOverTime;
+import com.gigabytedx.rpgleveling.modifiers.modifier.MiningFatigue;
 import com.gigabytedx.rpgleveling.modifiers.modifier.Nausea;
 import com.gigabytedx.rpgleveling.modifiers.modifier.Poison;
 import com.gigabytedx.rpgleveling.modifiers.modifier.Slowness;
@@ -96,7 +97,13 @@ public class GetBuffs {
 				buffs.add(buff);
 				Main.buffsMap.put(buffName, buff);
 				break;
+			default:
+				System.out.println("|||||||||||||||||||||||||||||||||||||||||||");
+				System.out.println("Not found");
+				System.out.println("|||||||||||||||||||||||||||||||||||||||||||");
+				break;
 			}
+				
 		}
 
 	}
@@ -114,6 +121,14 @@ public class GetBuffs {
 			switch (debuffConfSection.getString("Type")) {
 			case "slowness":
 				buff = new Slowness(plugin, buffName, debuffConfSection.getDouble("Rate"),
+						debuffConfSection.getLong("Duration"), debuffConfSection.getLong("Interval"),
+						debuffConfSection.getDouble("Intensity"), debuffConfSection.getString("type"),
+						debuffConfSection.getString("Target"), debuffConfSection.getString("Trigger"), "potion");
+				debuffs.add(buff);
+				Main.debuffsMap.put(buffName, buff);
+				break;
+			case "miningfatigue":
+				buff = new MiningFatigue(plugin, buffName, debuffConfSection.getDouble("Rate"),
 						debuffConfSection.getLong("Duration"), debuffConfSection.getLong("Interval"),
 						debuffConfSection.getDouble("Intensity"), debuffConfSection.getString("type"),
 						debuffConfSection.getString("Target"), debuffConfSection.getString("Trigger"), "potion");
