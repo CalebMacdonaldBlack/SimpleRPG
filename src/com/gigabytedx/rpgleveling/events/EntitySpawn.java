@@ -54,11 +54,9 @@ public class EntitySpawn implements Listener {
 							int countOfMobsInRegion = 0;
 							for (Entity entity : event.getLocation().getWorld().getEntities()) {
 								if (entity instanceof Monster || entity instanceof Animals) {
-									System.out.println("IS INSTANCE OF");
 									if (WorldGuardPlugin.inst().getRegionManager(entity.getLocation().getWorld())
 											.getApplicableRegions(entity.getLocation()).getRegions()
 											.contains((ProtectedRegion) protectedRegions.toArray()[0])) {
-										System.out.println("IS IN REGION");
 										countOfMobsInRegion++;
 									}
 
@@ -70,8 +68,6 @@ public class EntitySpawn implements Listener {
 								for (int x = 0; x < mobData.getSpawnRate(); x++) {
 									mobDataRandomPool.add(mobData);
 								}
-							else
-								System.out.println("Fuckk off we're full");
 						} else {
 							event.setCancelled(true);
 							return;
@@ -91,7 +87,6 @@ public class EntitySpawn implements Listener {
 
 				EntityType type = EntityType.valueOf(mobDataRandomPool.get(randomIndex).getType());
 				LivingEntity mob = (LivingEntity) event.getLocation().getWorld().spawnEntity(event.getLocation(), type);
-
 				mob.setCustomName(
 						ChatColor.RED + "LVL: " + ChatColor.GREEN + mobDataRandomPool.get(randomIndex).getLevel() + " "
 								+ ChatColor.GOLD + mobDataRandomPool.get(randomIndex).getMobName());
@@ -109,7 +104,6 @@ public class EntitySpawn implements Listener {
 					} else
 						mob.getEquipment().setItemInHand(new ItemStack(Material.valueOf(itemType)));
 				}
-				System.out.println("Spawn successful");
 				return;
 			} else {
 				return;

@@ -17,9 +17,12 @@ public class Item {
 	private String locationName;
 	private int damage;
 	private int protection;
-	
+	private String baseClass;
+	private int classLevelRequirement;
+
 	public Item(String name, String lore, double cost, Material type, boolean enchanted, List<Modifier> buffs,
-			List<Modifier> debuffs, String locationName, int damage, int protection) {
+			List<Modifier> debuffs, String locationName, int damage, int protection, String baseClass,
+			int classLevelRequirement) {
 		super();
 		this.name = name;
 		this.lore = lore;
@@ -31,6 +34,8 @@ public class Item {
 		this.locationName = locationName;
 		this.damage = damage;
 		this.protection = protection;
+		this.baseClass = baseClass;
+		this.classLevelRequirement = classLevelRequirement;
 	}
 
 	public String getName() {
@@ -72,6 +77,13 @@ public class Item {
 	public int getProtection() {
 		return protection;
 	}
-	
-	
+
+	public String getBaseClass() {
+		return baseClass;
+	}
+
+	public int getClassLevelRequirement() {
+		return classLevelRequirement;
+	}
+
 }

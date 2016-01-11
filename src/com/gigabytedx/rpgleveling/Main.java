@@ -22,8 +22,10 @@ import com.gigabytedx.rpgleveling.events.Interact;
 import com.gigabytedx.rpgleveling.events.InventoryInteract;
 import com.gigabytedx.rpgleveling.events.Join;
 import com.gigabytedx.rpgleveling.events.PlayerRespawn;
+import com.gigabytedx.rpgleveling.events.Potions;
 import com.gigabytedx.rpgleveling.item.GetItems;
 import com.gigabytedx.rpgleveling.item.Item;
+import com.gigabytedx.rpgleveling.item.ItemClassValue;
 import com.gigabytedx.rpgleveling.locations.GetLocations;
 import com.gigabytedx.rpgleveling.locations.Regions;
 import com.gigabytedx.rpgleveling.modifiers.GetBuffs;
@@ -46,6 +48,7 @@ public class Main extends JavaPlugin {
 	public static Map<UUID, ActiveModifiers> activeModifiers = new HashMap<>();
 	public int loreLength = 6;
 	public PlayerCooldowns playerCooldowns = new PlayerCooldowns();
+	public ItemClassValue itemClassValue;
 
 	public File MobSpawningDataFile = new File(getDataFolder() + "/Data/MobSpawningData.yml");
 	public FileConfiguration MobSpawningData = YamlConfiguration.loadConfiguration(MobSpawningDataFile);
@@ -63,6 +66,7 @@ public class Main extends JavaPlugin {
 		loadFiles(MobSpawningDataFile, MobSpawningData);
 		loadFiles(playerFoundItemsFile, playerFoundItemsConfig);
 		new GetMobData(this);
+		itemClassValue = new ItemClassValue(this);
 	}
 
 	public void onDisable() {
@@ -80,6 +84,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new PlayerRespawn(this), this);
 		pm.registerEvents(new EntitySpawn(this), this);
 		pm.registerEvents(new InventoryInteract(this), this);
+		pm.registerEvents(new Potions(), this);
 	}
 
 	private void registerCommands() {

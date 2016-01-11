@@ -56,6 +56,10 @@ public class AddItemToInventory {
 
 		lore.add(ChatColor.GOLD + "Cost: " + ChatColor.DARK_PURPLE + item.getCost());
 		lore.add("");
+		lore.add(ChatColor.BLUE + "Class: " + ChatColor.DARK_PURPLE + item.getBaseClass());
+		lore.add(ChatColor.BLUE + "Amount of class gear to use this: " + ChatColor.DARK_PURPLE + item.getClassLevelRequirement());
+		lore.add("");
+		
 		try {
 			String[] words = loreText.split("\\s+");
 

@@ -20,7 +20,7 @@ public class Poison extends Modifier{
 	@Override
 	public void applyBuff(Player player, Entity entity) {
 		if(getTarget().equals("player")){
-			if(getTrigger().equals("hold"))
+			if(getTrigger().equals("hold") || getTrigger().equals("have"))
 				player.addPotionEffect(new PotionEffect(PotionEffectType.POISON, Integer.MAX_VALUE, (int) getIntensity()));
 			else
 				player.addPotionEffect(new PotionEffect(PotionEffectType.POISON, (int) (getDuration()/1000), (int) getIntensity()));
@@ -31,5 +31,11 @@ public class Poison extends Modifier{
 			}
 		}
 		
+	}
+	
+	public void removeBuff(Player player){
+		if(getTarget().equals("player")){
+			player.removePotionEffect(PotionEffectType.POISON);
+		}
 	}
 }

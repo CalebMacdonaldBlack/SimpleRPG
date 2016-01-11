@@ -14,6 +14,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -21,6 +22,7 @@ import org.bukkit.potion.PotionEffect;
 import com.gigabytedx.rpgleveling.Main;
 import com.gigabytedx.rpgleveling.item.Item;
 import com.gigabytedx.rpgleveling.modifiers.Modifier;
+import com.gigabytedx.rpgleveling.modifiers.modifier.HealthIncrease;
 import com.gigabytedx.rpgleveling.shop.Shop;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -34,17 +36,61 @@ public class Interact implements Listener {
 	}
 
 	@EventHandler
+	public void itemInteract(PlayerInteractEvent event) {
+		try {
+			Item itemUsed = Main.itemMap.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName());
+
+			if (plugin.itemClassValue.getBaseClassValues(event.getPlayer()).get(itemUsed.getBaseClass()) < Main.itemMap
+					.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName()).getClassLevelRequirement()) {
+				event.setCancelled(true);
+				event.getPlayer().sendMessage(event.getPlayer().getItemInHand().getItemMeta().getDisplayName()
+						+ ChatColor.DARK_RED
+						+ " is not being used effectively because you do not have enough " + Main.itemMap
+								.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName()).getBaseClass()
+						+ " items equipped");
+			}
+
+		} catch (NullPointerException e) {
+
+		}
+
+	}
+
+	@EventHandler
 	public void onHit(EntityDamageByEntityEvent event) {
 		if (event.getDamager() instanceof Player) {
-
+			System.out.println("Here");
 			Player damager = (Player) event.getDamager();
 			try {
+				System.out.println("Starting");
+				System.out.println(damager.getItemInHand().getItemMeta().getDisplayName());
 				Item itemUsed = Main.itemMap.get(damager.getItemInHand().getItemMeta().getDisplayName());
-				for (Modifier buff : itemUsed.getBuffs()) {
-					buff.applyBuff(damager, event.getEntity());
+				System.out.println("COMPARE" + itemUsed.getBaseClass());
+				System.out.println(plugin.itemClassValue.getBaseClassValues(damager).get(itemUsed.getBaseClass()));
+				System.out.println(Main.itemMap.get(damager.getItemInHand().getItemMeta().getDisplayName())
+						.getClassLevelRequirement());
+				System.out.println(damager.getItemInHand().getItemMeta().getDisplayName());
+
+				if (plugin.itemClassValue.getBaseClassValues(damager).get(itemUsed.getBaseClass()) >= Main.itemMap
+						.get(damager.getItemInHand().getItemMeta().getDisplayName()).getClassLevelRequirement()) {
+					System.out.println("We have enough");
+
+					for (Modifier buff : itemUsed.getBuffs()) {
+						buff.applyBuff(damager, event.getEntity());
+					}
+					applyDamage((LivingEntity) event.getEntity(), itemUsed.getDamage());
+				} else {
+					(damager)
+							.sendMessage(damager.getItemInHand().getItemMeta().getDisplayName() + ChatColor.DARK_RED
+									+ " is not being used effectively because you do not have enough " + Main.itemMap
+											.get(damager.getItemInHand().getItemMeta().getDisplayName()).getBaseClass()
+									+ " items equipped");
+					event.setDamage(1);
+					return;
 				}
-				applyDamage((LivingEntity) event.getEntity(), itemUsed.getDamage());
 			} catch (NullPointerException e) {
+				System.out.println("OI BUDDY NULL ERRE");
+				e.printStackTrace();
 			}
 
 		} else if (event.getDamager() instanceof Arrow) {
@@ -99,7 +145,22 @@ public class Interact implements Listener {
 
 		for (ItemStack itemStack : entity.getEquipment().getArmorContents()) {
 			try {
-				armorProtectionValue += Main.itemMap.get(itemStack.getItemMeta().getDisplayName()).getProtection();
+				try {
+					if (plugin.itemClassValue.getBaseClassValues((Player) entity)
+							.get(Main.itemMap.get(itemStack.getItemMeta().getDisplayName())
+									.getBaseClass()) >= Main.itemMap.get(itemStack.getItemMeta().getDisplayName())
+											.getClassLevelRequirement()) {
+						armorProtectionValue += Main.itemMap.get(itemStack.getItemMeta().getDisplayName())
+								.getProtection();
+					} else {
+						((Player) entity).sendMessage(itemStack.getItemMeta().getDisplayName() + ChatColor.DARK_RED
+								+ "Is not being used effectively because you do not have enough "
+								+ Main.itemMap.get(itemStack.getItemMeta().getDisplayName()).getBaseClass()
+								+ " items equipped");
+					}
+				} catch (ClassCastException e) {
+					armorProtectionValue += Main.itemMap.get(itemStack.getItemMeta().getDisplayName()).getProtection();
+				}
 			} catch (NullPointerException e) {
 
 			}
@@ -115,20 +176,50 @@ public class Interact implements Listener {
 	public void onHoldItemInHand(PlayerItemHeldEvent event) {
 
 		checkArmor(event.getPlayer());
-		try {
-			Item itemUsed = Main.itemMap
-					.get(event.getPlayer().getInventory().getItem(event.getNewSlot()).getItemMeta().getDisplayName());
-			for (Modifier buff : itemUsed.getBuffs()) {
-				if (buff.getTrigger().equals("hold"))
-					buff.applyBuff(event.getPlayer(), null);
+		for (int itemSlot = 0; itemSlot < 9; itemSlot++) {
+			try {
+				Item itemUsed = Main.itemMap
+						.get(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName());
+
+				if (plugin.itemClassValue.getBaseClassValues(event.getPlayer()).get(Main.itemMap
+						.get(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName())
+						.getBaseClass()) >= Main.itemMap
+								.get(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName())
+								.getClassLevelRequirement()) {
+					if (itemUsed != null)
+						for (Modifier buff : itemUsed.getBuffs()) {
+							if (buff.getTrigger().equals("have"))
+								buff.applyBuff(event.getPlayer(), null);
+							if (buff.getTrigger().equals("hold") && itemSlot == event.getNewSlot()) {
+								buff.applyBuff(event.getPlayer(), null);
+							}
+						}
+
+				} else {
+					(event.getPlayer())
+							.sendMessage(
+									event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName()
+											+ ChatColor.DARK_RED
+											+ "Is not being used effectively because you do not have enough "
+											+ Main.itemMap.get(event.getPlayer().getInventory().getItem(itemSlot)
+													.getItemMeta().getDisplayName()).getBaseClass()
+									+ " items equipped");
+					event.getPlayer().setMaxHealth(20);
+				}
+
+				if (itemUsed != null) {
+					for (Modifier buff : itemUsed.getDebuffs()) {
+						if (buff.getTrigger().equals("have"))
+							buff.applyBuff(event.getPlayer(), null);
+						if (buff.getTrigger().equals("hold") && itemSlot == event.getNewSlot()) {
+							buff.applyBuff(event.getPlayer(), null);
+						}
+					}
+				}
+			} catch (NullPointerException e) {
 			}
-			for (Modifier buff : itemUsed.getDebuffs()) {
-				if (buff.getTrigger().equals("hold"))
-					buff.applyBuff(event.getPlayer(), null);
-			}
-		} catch (NullPointerException e) {
-			// event.getPlayer().sendMessage("not using a custom item");
 		}
+
 	}
 
 	@EventHandler
@@ -153,19 +244,50 @@ public class Interact implements Listener {
 	@EventHandler
 	public void onInventory(InventoryCloseEvent event) {
 		checkArmor((Player) event.getPlayer());
-		
-		try {
-			for (Modifier modifier : Main.itemMap.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName())
-					.getBuffs()) {
-				modifier.applyBuff((Player) event.getPlayer(), null);
-			}
-			for (Modifier modifier : Main.itemMap.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName())
-					.getDebuffs()) {
-				modifier.applyBuff((Player) event.getPlayer(), null);
-			}
-		} catch (NullPointerException e) {
+		for (int itemSlot = 0; itemSlot < 9; itemSlot++) {
+			try {
+				Item itemUsed = Main.itemMap
+						.get(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName());
+				if (itemUsed != null)
+					for (Modifier modifier : itemUsed.getBuffs()) {
+						if (modifier.getTrigger().equals("have"))
+							modifier.applyBuff((Player) event.getPlayer(), null);
+					}
+			} catch (NullPointerException e) {
 
+			}
 		}
+
+		for (int itemSlot = 0; itemSlot < 9; itemSlot++) {
+			try {
+				Item itemUsed = Main.itemMap
+						.get(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName());
+				if (itemUsed != null)
+					for (Modifier modifier : itemUsed.getDebuffs()) {
+						if (modifier.getTrigger().equals("have"))
+							modifier.applyBuff((Player) event.getPlayer(), null);
+					}
+			} catch (NullPointerException e) {
+
+			}
+		}
+		boolean hasHealthIncreaseItem = false;
+		for (int itemSlot = 0; itemSlot < 9; itemSlot++) {
+			try {
+				for (Modifier modifier : Main.itemMap
+						.get(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName())
+						.getBuffs()) {
+					if (modifier instanceof HealthIncrease) {
+						System.out.println("IT IS SIR");
+						hasHealthIncreaseItem = true;
+					}
+				}
+			} catch (NullPointerException e) {
+
+			}
+		}
+		if (!hasHealthIncreaseItem)
+			event.getPlayer().setMaxHealth(20);
 	}
 
 	private void checkArmor(Player player) {

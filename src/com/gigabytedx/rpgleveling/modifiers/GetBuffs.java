@@ -10,6 +10,7 @@ import com.gigabytedx.rpgleveling.Main;
 import com.gigabytedx.rpgleveling.modifiers.modifier.Blind;
 import com.gigabytedx.rpgleveling.modifiers.modifier.Chameleon;
 import com.gigabytedx.rpgleveling.modifiers.modifier.DamageOverTime;
+import com.gigabytedx.rpgleveling.modifiers.modifier.HealthIncrease;
 import com.gigabytedx.rpgleveling.modifiers.modifier.MiningFatigue;
 import com.gigabytedx.rpgleveling.modifiers.modifier.Nausea;
 import com.gigabytedx.rpgleveling.modifiers.modifier.Poison;
@@ -37,6 +38,7 @@ public class GetBuffs {
 
 		// iterate through skill names
 		for (String buffName : buffConfigSectionNames) {
+			System.out.println("BUFFNAME:  " + buffName);
 			ConfigurationSection buffConfSection = main.getConfig().getConfigurationSection("Buffs")
 					.getConfigurationSection(buffName);
 			Modifier buff;
@@ -97,6 +99,15 @@ public class GetBuffs {
 				buffs.add(buff);
 				Main.buffsMap.put(buffName, buff);
 				break;
+			case "healthboost":
+				System.out.println("|||||||||||||||||||||||||||||||||||||||||||");
+				buff = new HealthIncrease(plugin, buffName, buffConfSection.getDouble("Rate"),
+						buffConfSection.getLong("Duration"), buffConfSection.getLong("Interval"),
+						buffConfSection.getDouble("Intensity"), buffConfSection.getString("type"),
+						buffConfSection.getString("Target"), buffConfSection.getString("Trigger"), "potion");
+				buffs.add(buff);
+				Main.buffsMap.put(buffName, buff);
+				break;
 			default:
 				System.out.println("|||||||||||||||||||||||||||||||||||||||||||");
 				System.out.println("Buff Type Not found");
@@ -115,6 +126,7 @@ public class GetBuffs {
 
 		// iterate through skill names
 		for (String buffName : debuffConfigSectionNames) {
+			System.out.println("DEBUFFNAME:  " + buffName);
 			ConfigurationSection debuffConfSection = main.getConfig().getConfigurationSection("Debuffs")
 					.getConfigurationSection(buffName);
 			Modifier buff;

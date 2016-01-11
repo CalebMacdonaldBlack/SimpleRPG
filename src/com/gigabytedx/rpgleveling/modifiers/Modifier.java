@@ -83,5 +83,8 @@ public class Modifier {
 
 	public void applyBuff(Player damager, Entity entity) {
 	}
+	
+	public void removeBuff(Player damager) {
+	}
 
 }

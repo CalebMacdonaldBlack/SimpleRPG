@@ -20,7 +20,7 @@ public class MiningFatigue extends Modifier{
 	@Override
 	public void applyBuff(Player player, Entity entity) {
 		if(getTarget().equals("player")){
-			if(getTrigger().equals("hold"))
+			if(getTrigger().equals("hold") || getTrigger().equals("have"))
 				player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, (int) getIntensity()));
 			else
 				player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, (int) (getDuration()/1000), (int) getIntensity()));
@@ -31,5 +31,11 @@ public class MiningFatigue extends Modifier{
 			}
 		}
 		
+	}
+	
+	public void removeBuff(Player player){
+		if(getTarget().equals("player")){
+			player.removePotionEffect(PotionEffectType.SLOW_DIGGING);
+		}
 	}
 }

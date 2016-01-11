@@ -42,13 +42,15 @@ public class GetItems {
 			List<Modifier> debuffs = new ArrayList<>();
 			int damage = itemConfSection.getInt("Damage");
 			int protection = itemConfSection.getInt("Protection");
+			int classLevelRequirement = itemConfSection.getInt("Class Level Requirement");
+			String baseClass = itemConfSection.getString("Base Class");
 
 			if (type.equals(Material.POTION)) {
 
 				PotionItem potion = new PotionItem(
-						new Item(itemName, lore, cost, type, enchanted, buffs, debuffs, location, damage, protection),
-						itemConfSection.getBoolean("Enchanted"), itemConfSection.getInt("Potency"),
-						itemConfSection.getInt("Data"), itemConfSection.getBoolean("Splash"),
+						new Item(itemName, lore, cost, type, enchanted, buffs, debuffs, location, damage, protection, baseClass, classLevelRequirement),
+						itemConfSection.getInt("Duration"), itemConfSection.getInt("Potency"),
+						itemConfSection.getString("Potion Icon"), itemConfSection.getBoolean("Splash"),
 						itemConfSection.getInt("Qty"), itemConfSection.getInt("Cooldown"),
 						itemConfSection.getString("Potion Type"));
 
@@ -61,7 +63,6 @@ public class GetItems {
 
 				for (String buffName : buffNames) {
 					try {
-
 						buffs.add(Main.buffsMap.get(buffName));
 					} catch (NullPointerException e) {
 						// e.printStackTrace();
@@ -79,12 +80,12 @@ public class GetItems {
 					}
 				}
 			} catch (NullPointerException e) {
-				System.out.println(itemName + " does not have any buffs");
+				System.out.println(itemName + " does not have any debuffs");
 			}
 			// add new skill to list
-			items.add(new Item(itemName, lore, cost, type, enchanted, buffs, debuffs, location, damage, protection));
+			items.add(new Item(itemName, lore, cost, type, enchanted, buffs, debuffs, location, damage, protection, baseClass, classLevelRequirement));
 			Main.itemMap.put(ChatColor.BLUE + itemName,
-					new Item(itemName, lore, cost, type, enchanted, buffs, debuffs, location, damage, protection));
+					new Item(itemName, lore, cost, type, enchanted, buffs, debuffs, location, damage, protection, baseClass, classLevelRequirement));
 		}
 
 	}

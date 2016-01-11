@@ -1,10 +1,8 @@
 package com.gigabytedx.rpgleveling.events;
 
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.gigabytedx.rpgleveling.Main;
@@ -33,13 +31,6 @@ public class Join implements Listener {
 		}catch(NullPointerException e){
 			plugin.playerFoundItemsConfig.createSection("players." + player.getUniqueId() + ".found items");
 			plugin.saveCustomConfig(plugin.playerFoundItemsFile, plugin.playerFoundItemsConfig);
-		}
-	}
-	
-	@EventHandler
-	public void throwPot(ProjectileLaunchEvent event){
-		if(event.getEntityType().equals(EntityType.SPLASH_POTION)){
-			event.getEntity().setVelocity(event.getEntity().getVelocity().multiply(3));
 		}
 	}
 }
