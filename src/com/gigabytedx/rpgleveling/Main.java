@@ -14,6 +14,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.gigabytedx.rpgleveling.Mobs.GetMobData;
 import com.gigabytedx.rpgleveling.cooldowns.PlayerCooldowns;
 import com.gigabytedx.rpgleveling.events.EnitityDeath;
 import com.gigabytedx.rpgleveling.events.EntitySpawn;
@@ -59,9 +60,9 @@ public class Main extends JavaPlugin {
 		registerEvents();
 		registerConfig();
 		logger.info(pdfFile.getName() + " has been enabled (V." + pdfFile.getVersion() + ")");
-		//loadFiles(MobSpawningDataFile, MobSpawningData);
+		loadFiles(MobSpawningDataFile, MobSpawningData);
 		loadFiles(playerFoundItemsFile, playerFoundItemsConfig);
-		//new GetMobData(this);
+		new GetMobData(this);
 	}
 
 	public void onDisable() {

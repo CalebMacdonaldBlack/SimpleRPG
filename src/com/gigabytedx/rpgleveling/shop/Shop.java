@@ -25,17 +25,23 @@ public class Shop {
 				if (item.getLocationName().toLowerCase().equals(location.toLowerCase())) {
 					List<String> list = new ArrayList<>();
 					try {
-						if (((List<String>) plugin.playerFoundItemsConfig
-								.getConfigurationSection("players." + player.getUniqueId()).getList("found items"))
-										.size() > 0)
+						if (!plugin.playerFoundItemsConfig.getConfigurationSection("players." + player.getUniqueId())
+								.getList("found items").contains(item.getName())) {
 							list = (List<String>) plugin.playerFoundItemsConfig
 									.getConfigurationSection("players." + player.getUniqueId()).getList("found items");
+							list.add(item.getName());
+							plugin.playerFoundItemsConfig.getConfigurationSection("players." + player.getUniqueId())
+									.set("found items", list);
+
+						}
 					} catch (NullPointerException e) {
 						list = new ArrayList<>();
+						list.add(item.getName());
+						plugin.playerFoundItemsConfig.createSection("players." + player.getUniqueId() +".found items");
+						plugin.playerFoundItemsConfig.getConfigurationSection("players." + player.getUniqueId())
+								.set("found items", list);
+						
 					}
-					list.add(item.getName());
-					plugin.playerFoundItemsConfig.getConfigurationSection("players." + player.getUniqueId())
-							.set("found items", list);
 				}
 			} catch (NullPointerException e) {
 				try {
@@ -44,9 +50,10 @@ public class Shop {
 					e1.printStackTrace();
 					e.printStackTrace();
 				}
-				
+
 			}
 		}
+		plugin.saveCustomConfig(plugin.playerFoundItemsFile, plugin.playerFoundItemsConfig);
 		for (Item item : items) {
 			try {
 				if (plugin.playerFoundItemsConfig.getConfigurationSection("players." + player.getUniqueId())

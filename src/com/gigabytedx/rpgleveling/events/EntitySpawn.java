@@ -32,7 +32,15 @@ public class EntitySpawn implements Listener {
 	}
 
 	@EventHandler
-	public boolean onEntitySpawn(CreatureSpawnEvent event) {
+	public void onEntitySpawn(CreatureSpawnEvent event) {
+		if (event.getSpawnReason().equals(SpawnReason.NATURAL) || event.getSpawnReason().equals(SpawnReason.SPAWNER_EGG)) {
+			event.setCancelled(true);
+		}
+
+		if (event.getSpawnReason().equals(SpawnReason.CUSTOM)) {
+			return;
+		}
+
 		Set<ProtectedRegion> protectedRegions = WorldGuardPlugin.inst().getRegionManager(event.getLocation().getWorld())
 				.getApplicableRegions(event.getLocation()).getRegions();
 		try {
@@ -66,16 +74,14 @@ public class EntitySpawn implements Listener {
 								System.out.println("Fuckk off we're full");
 						} else {
 							event.setCancelled(true);
-							return false;
+							return;
 						}
 					}
 				else {
 					for (MobData mobData : plugin.regions
 							.getRegion(((ProtectedRegion) protectedRegions.toArray()[0]).getId()).getSpawnableMobs()) {
-						if (mobData.getType().equals(event.getEntityType().toString())) {
-							for (int x = 0; x < mobData.getSpawnRate(); x++) {
-								mobDataRandomPool.add(mobData);
-							}
+						for (int x = 0; x < mobData.getSpawnRate(); x++) {
+							mobDataRandomPool.add(mobData);
 						}
 
 					}
@@ -84,11 +90,8 @@ public class EntitySpawn implements Listener {
 				int randomIndex = random.nextInt(mobDataRandomPool.size());
 
 				EntityType type = EntityType.valueOf(mobDataRandomPool.get(randomIndex).getType());
-				LivingEntity mob = event.getEntity();
-				if (!mob.getType().equals(type)) {
-					event.setCancelled(true);
-					return false;
-				}
+				LivingEntity mob = (LivingEntity) event.getLocation().getWorld().spawnEntity(event.getLocation(), type);
+
 				mob.setCustomName(
 						ChatColor.RED + "LVL: " + ChatColor.GREEN + mobDataRandomPool.get(randomIndex).getLevel() + " "
 								+ ChatColor.GOLD + mobDataRandomPool.get(randomIndex).getMobName());
@@ -107,21 +110,18 @@ public class EntitySpawn implements Listener {
 						mob.getEquipment().setItemInHand(new ItemStack(Material.valueOf(itemType)));
 				}
 				System.out.println("Spawn successful");
-				return false;
+				return;
 			} else {
-				event.setCancelled(true);
-				return false;
+				return;
 			}
 		} catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
 			if (!event.getSpawnReason().equals(SpawnReason.NATURAL)
 					&& !event.getSpawnReason().equals(SpawnReason.JOCKEY)
 					&& !event.getSpawnReason().equals(SpawnReason.MOUNT)) {
 
-				System.out.println("Spawn successful 1: " + event.getSpawnReason().toString());
-				return false;
-			} else
 				event.setCancelled(true);
-			return false;
+				return;
+			}
 		}
 	}
 }

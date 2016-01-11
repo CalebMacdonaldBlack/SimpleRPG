@@ -21,7 +21,7 @@ public class AddItemToInventory {
 			ItemStack itemStack = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15);
 			ItemMeta meta = itemStack.getItemMeta();
 
-			meta.setDisplayName(ChatColor.DARK_RED + "Undiscovered");
+			meta.setDisplayName(ChatColor.DARK_RED + "More items to Discover!");
 			itemStack.setItemMeta(meta);
 
 			for (int i = 0; i < inv.getSize(); i++) {
@@ -55,6 +55,7 @@ public class AddItemToInventory {
 		List<String> lore = new ArrayList<>();
 
 		lore.add(ChatColor.GOLD + "Cost: " + ChatColor.DARK_PURPLE + item.getCost());
+		lore.add("");
 		try {
 			String[] words = loreText.split("\\s+");
 

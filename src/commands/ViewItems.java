@@ -28,14 +28,10 @@ public class ViewItems implements CommandExecutor {
 			Player player = (Player) sender;
 			List<Item> items = plugin.items.getItems();
 			player.sendMessage("size of items is: " + items.size());
-			Inventory inv = Bukkit.createInventory(player, 27, ChatColor.DARK_BLUE + "All available items");
-			
+			Inventory inv = Bukkit.createInventory(player, 54, ChatColor.DARK_BLUE + "All available items");
+
 			for (Item item : items) {
 				try {
-					System.out.println(item.getName());
-					System.out.println(
-							plugin.playerFoundItemsConfig.getConfigurationSection("players." + player.getUniqueId())
-									.getList("found items").toString());
 					if (plugin.playerFoundItemsConfig.getConfigurationSection("players." + player.getUniqueId())
 							.getList("found items").contains(item.getName())) {
 						inv = AddItemToInventory.addItem(inv, item, plugin, true, true);
@@ -44,19 +40,26 @@ public class ViewItems implements CommandExecutor {
 					System.out.println("Doesnt have a location name");
 				}
 			}
-			
-			for (Item item : items) {
-				try {
-					if (!(plugin.playerFoundItemsConfig.getConfigurationSection("players." + player.getUniqueId())
-							.getList("found items").contains(item.getName()))) {
-						inv = AddItemToInventory.addItem(inv, null, plugin, false, true);
-					}
-				} catch (NullPointerException e) {
-					System.out.println("Doesnt have a location name");
-				}
-			}
+			try {
+			if (items.size() > plugin.playerFoundItemsConfig.getConfigurationSection("players." + player.getUniqueId())
+					.getList("found items").size())
+				inv = AddItemToInventory.addItem(inv, null, plugin, false, true);
+			} catch (NullPointerException e) {
+				 inv = AddItemToInventory.addItem(inv, null, plugin, false, true);
+				 }
+			// for (Item item : items) {
+			// try {
+			// if
+			// (!(plugin.playerFoundItemsConfig.getConfigurationSection("players."
+			// + player.getUniqueId())
+			// .getList("found items").contains(item.getName()))) {
+			// inv = AddItemToInventory.addItem(inv, null, plugin, false, true);
+			// }
+			// } catch (NullPointerException e) {
+			// inv = AddItemToInventory.addItem(inv, null, plugin, false, true);
+			// }
+			// }
 
-			
 			player.openInventory(inv);
 		}
 		return false;
