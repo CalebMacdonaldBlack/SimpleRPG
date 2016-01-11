@@ -14,9 +14,11 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.gigabytedx.rpgleveling.cooldowns.PlayerCooldowns;
 import com.gigabytedx.rpgleveling.events.EnitityDeath;
 import com.gigabytedx.rpgleveling.events.EntitySpawn;
 import com.gigabytedx.rpgleveling.events.Interact;
+import com.gigabytedx.rpgleveling.events.InventoryInteract;
 import com.gigabytedx.rpgleveling.events.Join;
 import com.gigabytedx.rpgleveling.events.PlayerRespawn;
 import com.gigabytedx.rpgleveling.item.GetItems;
@@ -42,6 +44,7 @@ public class Main extends JavaPlugin {
 	public static Map<String, Modifier> debuffsMap = new HashMap<>();
 	public static Map<UUID, ActiveModifiers> activeModifiers = new HashMap<>();
 	public int loreLength = 6;
+	public PlayerCooldowns playerCooldowns = new PlayerCooldowns();
 
 	public File MobSpawningDataFile = new File(getDataFolder() + "/Data/MobSpawningData.yml");
 	public FileConfiguration MobSpawningData = YamlConfiguration.loadConfiguration(MobSpawningDataFile);
@@ -75,6 +78,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new EnitityDeath(this), this);
 		pm.registerEvents(new PlayerRespawn(this), this);
 		pm.registerEvents(new EntitySpawn(this), this);
+		pm.registerEvents(new InventoryInteract(this), this);
 	}
 
 	private void registerCommands() {

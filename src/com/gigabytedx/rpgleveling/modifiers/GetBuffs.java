@@ -99,7 +99,7 @@ public class GetBuffs {
 				break;
 			default:
 				System.out.println("|||||||||||||||||||||||||||||||||||||||||||");
-				System.out.println("Not found");
+				System.out.println("Buff Type Not found");
 				System.out.println("|||||||||||||||||||||||||||||||||||||||||||");
 				break;
 			}
