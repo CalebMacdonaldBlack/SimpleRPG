@@ -29,10 +29,14 @@ public class InventoryInteract implements Listener {
 
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event) {
-		if(event.getCursor().getType().equals(Material.STAINED_GLASS_PANE)){
-			event.setCancelled(true);
-		}else if(event.getCurrentItem().getType().equals(Material.STAINED_GLASS_PANE)){
-			event.setCancelled(true);
+		try {
+			if (event.getCursor().getType().equals(Material.STAINED_GLASS_PANE)) {
+				event.setCancelled(true);
+			} else if (event.getCurrentItem().getType().equals(Material.STAINED_GLASS_PANE)) {
+				event.setCancelled(true);
+			}
+		} catch (NullPointerException e) {
+
 		}
 		// System.out.println("SLOT IS THIS: " + event.getRawSlot());
 		// System.out.println("OTHER SLOT IS THIS: " + event.getSlot());
@@ -46,11 +50,11 @@ public class InventoryInteract implements Listener {
 							ChatColor.RED + "Please wait for your item cooldowns to finish before altering the hotbar");
 				}
 			} else if (event.isShiftClick()) {
-					if (!(plugin.playerCooldowns.getCooldownMap().get((Player) event.getWhoClicked()).isEmpty())) {
-						event.setCancelled(true);
-						event.getWhoClicked().sendMessage(ChatColor.RED
-								+ "Please wait for your item cooldowns to finish before altering the hotbar");
-					}
+				if (!(plugin.playerCooldowns.getCooldownMap().get((Player) event.getWhoClicked()).isEmpty())) {
+					event.setCancelled(true);
+					event.getWhoClicked().sendMessage(
+							ChatColor.RED + "Please wait for your item cooldowns to finish before altering the hotbar");
+				}
 			}
 		} catch (NullPointerException e) {
 

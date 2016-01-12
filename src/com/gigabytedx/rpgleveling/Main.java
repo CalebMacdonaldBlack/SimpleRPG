@@ -32,6 +32,7 @@ import com.gigabytedx.rpgleveling.modifiers.GetBuffs;
 import com.gigabytedx.rpgleveling.modifiers.Modifier;
 import com.gigabytedx.rpgleveling.player.ActiveModifiers;
 
+import commands.GetClass;
 import commands.GetXP;
 import commands.OpenShop;
 import commands.SetWalk;
@@ -92,6 +93,7 @@ public class Main extends JavaPlugin {
 		getCommand("getxp").setExecutor(new GetXP(this));
 		getCommand("openshop").setExecutor(new OpenShop(this));
 		getCommand("setwalk").setExecutor(new SetWalk(this));
+		getCommand("getclass").setExecutor(new GetClass(this));
 	}
 
 	private void registerConfig() {

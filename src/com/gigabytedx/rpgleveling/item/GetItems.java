@@ -43,7 +43,7 @@ public class GetItems {
 			int damage = itemConfSection.getInt("Damage");
 			int protection = itemConfSection.getInt("Protection");
 			int classLevelRequirement = itemConfSection.getInt("Class Level Requirement");
-			String baseClass = itemConfSection.getString("Base Class");
+			String baseClass = itemConfSection.getString("Base Class").toLowerCase();
 
 			if (type.equals(Material.POTION)) {
 

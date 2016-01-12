@@ -15,7 +15,8 @@ import com.questcraft.itemapi.ItemAPI;
 
 public class AddItemToInventory {
 
-	public static Inventory addItem(Inventory inv, Item item, Main plugin, boolean obtainable, boolean displayLocation) {
+	public static Inventory addItem(Inventory inv, Item item, Main plugin, boolean obtainable,
+			boolean displayLocation) {
 
 		if (!obtainable) {
 			ItemStack itemStack = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 15);
@@ -33,16 +34,16 @@ public class AddItemToInventory {
 			inv.addItem(itemStack);
 			return inv;
 		}
-		
+
 		ItemStack itemStack = new ItemStack(item.getType());
-		
-		if(item instanceof PotionItem){
+
+		if (item instanceof PotionItem) {
 			itemStack = ((PotionItem) item).getPotion();
 		}
-		
+
 		ItemMeta meta = itemStack.getItemMeta();
 		meta.setDisplayName(ChatColor.BLUE + item.getName());
-		
+
 		try {
 			if (item.isEnchanted()) {
 				ItemAPI.addGlow(itemStack);
@@ -57,9 +58,10 @@ public class AddItemToInventory {
 		lore.add(ChatColor.GOLD + "Cost: " + ChatColor.DARK_PURPLE + item.getCost());
 		lore.add("");
 		lore.add(ChatColor.BLUE + "Class: " + ChatColor.DARK_PURPLE + item.getBaseClass());
-		lore.add(ChatColor.BLUE + "Amount of class gear to use this: " + ChatColor.DARK_PURPLE + item.getClassLevelRequirement());
+		lore.add(ChatColor.BLUE + "Amount of class gear to use this: " + ChatColor.DARK_PURPLE
+				+ item.getClassLevelRequirement());
 		lore.add("");
-		
+
 		try {
 			String[] words = loreText.split("\\s+");
 
@@ -110,7 +112,7 @@ public class AddItemToInventory {
 			lore.add("");
 			lore.add(ChatColor.GREEN + "Armor Protection: " + ChatColor.RED + item.getProtection());
 		}
-		if(displayLocation){
+		if (displayLocation) {
 			lore.add("");
 			lore.add(ChatColor.AQUA + "Location: " + ChatColor.GOLD + item.getLocationName());
 		}
@@ -119,14 +121,18 @@ public class AddItemToInventory {
 		inv.addItem(itemStack);
 		return inv;
 	}
-	
+
 	public static ItemStack getItemStack(Item item, Main plugin) {
-		
+		System.out.println(item.getName());
 		ItemStack itemStack = new ItemStack(item.getType());
-		
+
+		if (item instanceof PotionItem) {
+			itemStack = ((PotionItem) item).getPotion();
+		}
+
 		ItemMeta meta = itemStack.getItemMeta();
 		meta.setDisplayName(ChatColor.BLUE + item.getName());
-		
+
 		try {
 			if (item.isEnchanted()) {
 				ItemAPI.addGlow(itemStack);
@@ -134,10 +140,17 @@ public class AddItemToInventory {
 		} catch (IllegalArgumentException e) {
 
 		}
-		
+
 		String loreText = item.getLore();
 
 		List<String> lore = new ArrayList<>();
+
+		lore.add("");
+		lore.add(ChatColor.BLUE + "Class: " + ChatColor.DARK_PURPLE + item.getBaseClass());
+		lore.add(ChatColor.BLUE + "Amount of class gear to use this: " + ChatColor.DARK_PURPLE
+				+ item.getClassLevelRequirement());
+		lore.add("");
+
 		try {
 			String[] words = loreText.split("\\s+");
 

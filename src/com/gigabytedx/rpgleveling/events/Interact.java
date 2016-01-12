@@ -1,5 +1,6 @@
 package com.gigabytedx.rpgleveling.events;
 
+import java.util.Map;
 import java.util.Set;
 
 import org.bukkit.ChatColor;
@@ -175,23 +176,32 @@ public class Interact implements Listener {
 	@EventHandler
 	public void onHoldItemInHand(PlayerItemHeldEvent event) {
 		
-		if(event.getNewSlot() > 3 && event.getNewSlot() < 9){
+		if(event.getNewSlot() > 2 && event.getNewSlot() < 9){
+			System.out.println("canlesded mate");
 			event.setCancelled(true);
 		}
 
 		checkArmor(event.getPlayer());
-		for (int itemSlot = 0; itemSlot < 9; itemSlot++) {
+		for (int itemSlot = 0; itemSlot < 8; itemSlot++) {
 			try {
 				Item itemUsed = Main.itemMap
 						.get(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName());
-
-				if (plugin.itemClassValue.getBaseClassValues(event.getPlayer()).get(Main.itemMap
+				System.out.println(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName());
+				
+				Map<String, Integer> baseClassValue = plugin.itemClassValue.getBaseClassValues(event.getPlayer());
+				System.out.println(baseClassValue.toString());
+				String baseClassForItem = Main.itemMap
 						.get(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName())
-						.getBaseClass()) >= Main.itemMap
-								.get(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName())
-								.getClassLevelRequirement()) {
+						.getBaseClass();
+				int itemBaseClassLevelRequirement = Main.itemMap
+						.get(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName())
+						.getClassLevelRequirement();
+				
+				if (baseClassValue.get(baseClassForItem) >= itemBaseClassLevelRequirement) {
+					System.out.println("made it this far");
 					if (itemUsed != null)
 						for (Modifier buff : itemUsed.getBuffs()) {
+							System.out.println("APPLYING BUFF: " + buff.getName());
 							if (buff.getTrigger().equals("have"))
 								buff.applyBuff(event.getPlayer(), null);
 							if (buff.getTrigger().equals("hold") && itemSlot == event.getNewSlot()) {

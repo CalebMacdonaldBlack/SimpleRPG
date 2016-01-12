@@ -1,11 +1,13 @@
 package com.gigabytedx.rpgleveling.events;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gigabytedx.rpgleveling.Main;
 
@@ -35,8 +37,12 @@ public class Join implements Listener {
 			plugin.saveCustomConfig(plugin.playerFoundItemsFile, plugin.playerFoundItemsConfig);
 		}
 		
+		ItemStack itemStack = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7);
+		ItemMeta meta = itemStack.getItemMeta();
+		meta.setDisplayName(ChatColor.RED + "Locked ability slot");
+		itemStack.setItemMeta(meta);
 		for(int itemSlot = 3; itemSlot < 9; itemSlot++){
-			event.getPlayer().getInventory().setItem(itemSlot, new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7));
+			event.getPlayer().getInventory().setItem(itemSlot, itemStack);
 		}
 		
 	}
