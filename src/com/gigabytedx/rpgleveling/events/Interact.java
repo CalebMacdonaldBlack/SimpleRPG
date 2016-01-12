@@ -174,6 +174,10 @@ public class Interact implements Listener {
 
 	@EventHandler
 	public void onHoldItemInHand(PlayerItemHeldEvent event) {
+		
+		if(event.getNewSlot() > 3 && event.getNewSlot() < 9){
+			event.setCancelled(true);
+		}
 
 		checkArmor(event.getPlayer());
 		for (int itemSlot = 0; itemSlot < 9; itemSlot++) {
@@ -200,7 +204,7 @@ public class Interact implements Listener {
 							.sendMessage(
 									event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName()
 											+ ChatColor.DARK_RED
-											+ "Is not being used effectively because you do not have enough "
+											+ " is not being used effectively because you do not have enough "
 											+ Main.itemMap.get(event.getPlayer().getInventory().getItem(itemSlot)
 													.getItemMeta().getDisplayName()).getBaseClass()
 									+ " items equipped");
@@ -278,7 +282,6 @@ public class Interact implements Listener {
 						.get(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName())
 						.getBuffs()) {
 					if (modifier instanceof HealthIncrease) {
-						System.out.println("IT IS SIR");
 						hasHealthIncreaseItem = true;
 					}
 				}

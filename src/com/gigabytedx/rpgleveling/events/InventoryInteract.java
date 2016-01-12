@@ -1,13 +1,13 @@
 package com.gigabytedx.rpgleveling.events;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -29,6 +29,11 @@ public class InventoryInteract implements Listener {
 
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event) {
+		if(event.getCursor().getType().equals(Material.STAINED_GLASS_PANE)){
+			event.setCancelled(true);
+		}else if(event.getCurrentItem().getType().equals(Material.STAINED_GLASS_PANE)){
+			event.setCancelled(true);
+		}
 		// System.out.println("SLOT IS THIS: " + event.getRawSlot());
 		// System.out.println("OTHER SLOT IS THIS: " + event.getSlot());
 		// System.out.println("TOP SIZE: " +
