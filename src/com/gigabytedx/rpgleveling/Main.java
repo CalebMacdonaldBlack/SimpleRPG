@@ -56,6 +56,9 @@ public class Main extends JavaPlugin {
 	
 	public File playerFoundItemsFile = new File(getDataFolder() + "/Data/playerDataFile.yml");
 	public FileConfiguration playerFoundItemsConfig = YamlConfiguration.loadConfiguration(MobSpawningDataFile);
+	
+	public static final int goldBarWorth = 10;
+	public static final int goldNuggetWorth = 1;
 
 	public void onEnable() {
 		PluginDescriptionFile pdfFile = getDescription();

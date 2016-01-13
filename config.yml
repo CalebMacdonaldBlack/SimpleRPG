@@ -1,35 +1,153 @@
 skills: 
-  Tank:
+  tank:
     items:
-     - Longsword
      - Broadsword
-     - Claymore
+     - Splash Damage Resistance
+     - Defence Artifact
      - Diamond Helmet
      - Diamond Chestplate
      - Diamond Leggings
      - Diamond Boots
-  Healer:
+  healer:
     items:
-      - Leather Helmet
-      - Leather Chestplate
-      - Leather Leggings
-      - Leather Boots
-      - Klamath Dagger
-  DPS:
-    items:
-      - Klamath Scimitar
+      - Healers Trusty Dagger
+      - Splash Regeneration
+      - Splash Healing
       - Iron Helmet
       - Iron Chestplate
       - Iron Leggings
       - Iron Boots
-  Bard:
+  dps:
+    items:
+      - Long Bow
+      - Splash DPS
+      - Splash Strength
+      - Leather Helmet
+      - Leather Chestplate
+      - Leather Leggings
+      - Leather Boots
+  bard:
     items:
       - Boarding Axe
+      - Splash Speed
+      - Splash Fire Resistance
       - Chain Helmet
       - Chain Chestplate
       - Chain Leggings
       - Chain Boots
 Items:
+  Splash Regeneration:
+    Location: spawn
+    Type: POTION
+    Lore: Regeneration Potion to increase health.
+    Cost: 10
+    Buffs:
+    Debuffs:
+    Duration: 10
+    Potency: 2
+    Potion Icon: REGEN
+    Splash: true
+    Qty: 2
+    Cooldown: 20
+    Potion Type: REGENERATION
+    Base Class: Healer
+    Class Level Requirement: 5
+  Splash DPS:
+    Location: spawn
+    Type: POTION
+    Lore: Potion of damage. Be careful not to friendly fire!
+    Cost: 10
+    Buffs:
+    Debuffs:
+    Duration: 10
+    Potency: 2
+    Potion Icon: INSTANT_DAMAGE 
+    Splash: true
+    Qty: 2
+    Cooldown: 20
+    Potion Type: HARM
+    Base Class: DPS
+    Class Level Requirement: 5
+  Splash Strength:
+    Location: spawn
+    Type: POTION
+    Lore: Deal extra damage!
+    Cost: 10
+    Buffs:
+    Debuffs:
+    Duration: 20
+    Potency: 2
+    Potion Icon: STRENGTH  
+    Splash: false
+    Qty: 2
+    Cooldown: 20
+    Potion Type: INCREASE_DAMAGE
+    Base Class: DPS
+    Class Level Requirement: 5
+  Splash Speed:
+    Location: spawn
+    Type: POTION
+    Lore: An old, damaged helmet, It'll do though.
+    Cost: 10
+    Buffs:
+    Debuffs:
+    Duration: 10
+    Potency: 2
+    Potion Icon: SPEED 
+    Splash: false
+    Qty: 3
+    Cooldown: 20
+    Potion Type: SPEED
+    Base Class: Bard
+    Class Level Requirement: 5
+  Splash Healing:
+    Location: spawn
+    Type: POTION
+    Lore: An old, damaged helmet, It'll do though.
+    Cost: 10
+    Buffs:
+    Debuffs:
+    Duration: 10
+    Potency: 2
+    Potion Icon: INSTANT_HEAL 
+    Splash: true
+    Qty: 3
+    Cooldown: 20
+    Potion Type: HEAL
+    Base Class: Healer
+    Class Level Requirement: 5
+  Splash Fire Resistance:
+    Location: spawn
+    Type: POTION
+    Lore: An old, damaged helmet, It'll do though.
+    Cost: 10
+    Buffs:
+    Debuffs:
+    Duration: 10
+    Potency: 2
+    Potion Icon: FIRE_RESISTANCE 
+    Splash: true
+    Qty: 3
+    Cooldown: 20
+    Potion Type: FIRE_RESISTANCE
+    Base Class: Bard
+    Class Level Requirement: 5
+  Splash Damage Resistance:
+    Location: spawn
+    Type: POTION
+    Lore: An old, damaged helmet, It'll do though.
+    Cost: 10
+    Buffs:
+    Debuffs:
+    Duration: 10
+    Potency: 2
+    Potion Icon: JUMP
+    Splash: true
+    Qty: 3
+    Cooldown: 20
+    Potion Type: DAMAGE_RESISTANCE
+    Base Class: Tank
+    Class Level Requirement: 5
   Leather Helmet:
     Location: spawn
     Type: LEATHER_HELMET
@@ -39,7 +157,9 @@ Items:
     Buffs:
     Debuffs:
     Protection: 3
-  Leather Body:
+    Base Class: DPS
+    Class Level Requirement: 5
+  Leather Chestplate:
     Location: spawn
     Type: LEATHER_CHESTPLATE
     Lore: An old, damaged chestpiece. It'll do though.
@@ -48,7 +168,9 @@ Items:
     Buffs:
     Debuffs:
     Protection: 3
-  Leather Legs:
+    Base Class: DPS
+    Class Level Requirement: 5
+  Leather Leggings:
     Location: spawn
     Type: LEATHER_LEGGINGS
     Lore: An old, damaged set of legs. It'll do though.
@@ -57,6 +179,8 @@ Items:
     Buffs:
     Debuffs:
     Protection: 3
+    Base Class: DPS
+    Class Level Requirement: 5
   Leather Boots:
     Location: spawn
     Type: LEATHER_BOOTS
@@ -66,6 +190,8 @@ Items:
     Buffs:
     Debuffs:
     Protection: 3
+    Base Class: DPS
+    Class Level Requirement: 5
   Iron Helmet:
     Location: spawn
     Type: IRON_HELMET
@@ -75,7 +201,9 @@ Items:
     Buffs:
     Debuffs:
     Protection: 3
-  Iron Body:
+    Base Class: Healer
+    Class Level Requirement: 5
+  Iron Chestplate:
     Location: spawn
     Type: IRON_CHESTPLATE
     Lore: An old, damaged chestpiece. It'll do though.
@@ -84,7 +212,9 @@ Items:
     Buffs:
     Debuffs:
     Protection: 3
-  Iron Legs:
+    Base Class: Healer
+    Class Level Requirement: 5
+  Iron Leggings:
     Location: spawn
     Type: IRON_LEGGINGS
     Lore: An old, damaged set of legs. It'll do though.
@@ -93,6 +223,8 @@ Items:
     Buffs:
     Debuffs:
     Protection: 3
+    Base Class: Healer
+    Class Level Requirement: 5
   Iron Boots:
     Location: spawn
     Type: IRON_BOOTS
@@ -102,6 +234,8 @@ Items:
     Buffs:
     Debuffs:
     Protection: 3
+    Base Class: Healer
+    Class Level Requirement: 5
   Diamond Helmet:
     Location: spawn
     Type: DIAMOND_HELMET
@@ -111,7 +245,9 @@ Items:
     Buffs:
     Debuffs:
     Protection: 3
-  Diamond Body:
+    Base Class: Tank
+    Class Level Requirement: 5
+  Diamond Chestplate:
     Location: spawn
     Type: DIAMOND_CHESTPLATE
     Lore: An old, damaged chestpiece. It'll do though.
@@ -120,7 +256,9 @@ Items:
     Buffs:
     Debuffs:
     Protection: 3
-  Diamond Legs:
+    Base Class: Tank
+    Class Level Requirement: 5
+  Diamond Leggings:
     Location: spawn
     Type: DIAMOND_LEGGINGS
     Lore: An old, damaged set of legs. It'll do though.
@@ -129,6 +267,8 @@ Items:
     Buffs:
     Debuffs:
     Protection: 3
+    Base Class: Tank
+    Class Level Requirement: 5
   Diamond Boots:
     Location: spawn
     Type: DIAMOND_BOOTS
@@ -138,6 +278,8 @@ Items:
     Buffs:
     Debuffs:
     Protection: 3
+    Base Class: Tank
+    Class Level Requirement: 5
   Chain Helmet:
     Location: spawn
     Type: CHAINMAIL_HELMET
@@ -147,7 +289,9 @@ Items:
     Buffs:
     Debuffs:
     Protection: 3
-  Chain Body:
+    Base Class: Bard
+    Class Level Requirement: 5
+  Chain Chestplate:
     Location: spawn
     Type: CHAINMAIL_CHESTPLATE
     Lore: An old, damaged chestpiece. It'll do though.
@@ -156,7 +300,9 @@ Items:
     Buffs:
     Debuffs:
     Protection: 3
-  Chain Legs:
+    Base Class: Bard
+    Class Level Requirement: 5
+  Chain Leggings:
     Location: spawn
     Type: CHAINMAIL_LEGGINGS
     Lore: 
@@ -165,6 +311,19 @@ Items:
     Buffs:
     Debuffs:
     Protection: 3
+    Base Class: Bard
+    Class Level Requirement: 5
+  Chain Boots:
+    Location: spawn
+    Type: CHAINMAIL_BOOTS
+    Lore: 
+    Enchanted: false
+    Cost: 15
+    Buffs:
+    Debuffs:
+    Protection: 3
+    Base Class: Bard
+    Class Level Requirement: 5
   Boarding Axe:
     Location: spawn
     Type: IRON_AXE
@@ -175,6 +334,8 @@ Items:
     Debuffs:
       - Slowness1
     Damage: 5
+    Base Class: Bard
+    Class Level Requirement: 5
   Klamath Dagger:
     Location: spawn
     Type: STONE_SWORD
@@ -185,6 +346,8 @@ Items:
      - poison1
     Debuffs:
     Damage: 5
+    Base Class: DPS
+    Class Level Requirement: 5
   Klamath Scimitar:
     Location: spawn
     Type: STONE_SWORD
@@ -195,6 +358,8 @@ Items:
      - poison1
     Debuffs:
     Damage: 7
+    Base Class: DPS
+    Class Level Requirement: 5
   Longsword:
     Location: spawn
     Type: IRON_SWORD
@@ -204,7 +369,10 @@ Items:
     Buffs:
     Debuffs:
      - Slowness1
+     - MiningFatigue
     Damage: 9
+    Base Class: Tank
+    Class Level Requirement: 5
   Broadsword:
     Location: spawn
     Type: IRON_SWORD
@@ -214,11 +382,13 @@ Items:
     Buffs:
     Debuffs:
      - Slowness2
+     - MiningFatigue
     Damage: 12
+    Base Class: Tank
+    Class Level Requirement: 5
   Claymore:
-    Location: spawn
     Type: IRON_SWORD
-    Location:
+    Location: spawn
     Lore: This is a rusty iron sword crafted by a young blacksmith apprentice. It doesn't do much damage but you can tell the poor kid put hit heart and soul into it
     Enchanted: false
     Cost: 20
@@ -228,19 +398,34 @@ Items:
       - Blind1
     Debuffs:
       - Slowness1
+      - MiningFatigue
+    Base Class: DPS
+    Class Level Requirement: 5
+  Healers Trusty Dagger:
+    Type: IRON_SWORD
+    Location: spawn
+    Lore: Allows the shanker to make a clean getaway
+    Enchanted: false
+    Cost: 20
+    Buffs:
+    - Evade1
+    Debuffs:
+    Base Class: Healer
+    Class Level Requirement: 5
   Chameleon Staff:
     Type: BLAZE_ROD
-    Location:
+    Location: other
     Lore: This spooky staff grants permenent cloaking when holding it
     Enchanted: false
     Cost: 20
     Buffs:
       - Cloak
     Debuffs:
-      - Slowness3
+    Base Class: Bard
+    Class Level Requirement: 5
   Swiehandler:
     Type: IRON_SWORD
-    Location:
+    Location: other
     Lore: A 2 meter long sword that weighs more at least 100kg. Why would anybody consider wielding this?
     Enchanted: false
     Cost: 40
@@ -250,10 +435,12 @@ Items:
       - Fatigue2
     Debuffs:
       - Slowness1
+    Base Class: DPS
+    Class Level Requirement: 5
   Hunting Bow:
     Type: BOW
-    Location:
-    Lore: A pesky little hunting bow. Extended use burdens the archer with lasting blisters
+    Location: other
+    Lore: A pesky little hunting bow. Duration use burdens the archer with lasting blisters
     Enchanted: false
     Cost: 15
     Buffs:
@@ -261,9 +448,11 @@ Items:
       - Blind1
     Debuffs:
       - Slowness1
+    Base Class: DPS
+    Class Level Requirement: 5
   Long Bow:
     Type: BOW
-    Location:
+    Location: spawn
     Lore: The great long bow that Sir Johnathan Weathersteed rode into battle with.
     Enchanted: false
     Cost: 100
@@ -271,11 +460,39 @@ Items:
       - Bleed1
       - Fatigue2
     Debuffs:
-      - Slowness1
+      - Aim1
+    Base Class: DPS
+    Damage: 6
+    Class Level Requirement: 5
+  Calebs Bow:
+    Type: BOW
+    Location: other
+    Lore: The great long bow that Sir Johnathan Weathersteed rode into battle with.
+    Enchanted: false
+    Cost: 100
+    Buffs:
+      - Bleed1
+      - Fatigue2
+      - poison1
+    Debuffs:
+    damage: 5
+    Base Class: DPS
+    Class Level Requirement: 5
+  Defence Artifact:
+    Type: BLAZE_POWDER
+    Location: other
+    Lore: Equiping this artifact grants bonus health
+    Enchanted: false
+    Cost: 100
+    Buffs:
+      - HealthBoost1
+    Debuffs:
+    Base Class: Tank
+    Class Level Requirement: 5
 Buffs:
   Bleed1:
     Rate: 0.5
-    Duration: 3000
+    Duration: 3
     Interval: 20
     Intensity: 1
     Type: damageOverTime
@@ -283,7 +500,7 @@ Buffs:
     Trigger: hit
   Fatigue1:
     Rate: 0
-    Duration: 3000
+    Duration: 3
     Interval: 20
     Intensity: 1
     Type: slowness
@@ -291,7 +508,7 @@ Buffs:
     Trigger: hit
   Fatigue2:
     Rate: 0
-    Duration: 5000
+    Duration: 5
     Interval: 20
     Intensity: 2
     Type: slowness
@@ -299,7 +516,7 @@ Buffs:
     Trigger: hit
   Stun1:
     Rate: 0
-    Duration: 10000
+    Duration: 10
     Interval: 20
     Intensity: 3
     Type: nausea
@@ -307,7 +524,7 @@ Buffs:
     Trigger: hit
   Blind1:
     Rate: 0
-    Duration: 10000
+    Duration: 10
     Interval: 20
     Intensity: 3
     Type: blind
@@ -315,7 +532,7 @@ Buffs:
     Trigger: hit
   poison1:
     Rate: 0
-    Duration: 5000
+    Duration: 5
     Interval: 20
     Intensity: 1
     Type: poison
@@ -328,7 +545,23 @@ Buffs:
     Intensity: 0
     Type: chameleon
     Target: player
-    Trigger: hold
+    Trigger: have
+  Evade1:
+    Rate: 0
+    Duration: 2
+    Interval: 20
+    Intensity: 2
+    Type: speed
+    Target: player
+    Trigger: hit
+  HealthBoost1:
+    Rate: 0
+    Duration: 0
+    Interval: 20
+    Intensity: 10
+    Type: healthboost
+    Target: player
+    Trigger: have
 Debuffs:
   Slowness1:
     Rate: 0
@@ -337,7 +570,7 @@ Debuffs:
     Intensity: 1
     Type: slowness
     Target: player
-    Trigger: hold
+    Trigger: have
   Slowness2:
     Rate: 0
     Duration: 0
@@ -345,7 +578,7 @@ Debuffs:
     Intensity: 2
     Type: slowness
     Target: player
-    Trigger: hold
+    Trigger: have
   Slowness3:
     Rate: 0
     Duration: 0
@@ -353,11 +586,27 @@ Debuffs:
     Intensity: 3
     Type: slowness
     Target: player
+    Trigger: have
+  Aim1:
+    Rate: 0
+    Duration: 0
+    Interval: 20
+    Intensity: 3
+    Type: slowness
+    Target: player
+    Trigger: hold
+  MiningFatigue:
+    Rate: 0
+    Duration: 0
+    Interval: 20
+    Intensity: 7
+    Type: miningfatigue
+    Target: player
     Trigger: hold
 Locations:
   spawn:
     testoption: false
-  Blithe-water:
+  other:
     testoption: false
   Renford:
     testoption: false

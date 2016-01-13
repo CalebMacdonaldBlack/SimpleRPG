@@ -12,7 +12,7 @@ import com.gigabytedx.rpgleveling.modifiers.Modifier;
 
 public class DamageOverTime extends Modifier {
 
-	public DamageOverTime(Main plugin, String name, double rate, Long duration, Long interval, double intensity,
+	public DamageOverTime(Main plugin, String name, double rate, int duration, Long interval, double intensity,
 			String type, String target, String trigger, String modifierType) {
 		super(plugin, name, rate, duration, interval, intensity, type, target, trigger, modifierType);
 	}
@@ -21,7 +21,7 @@ public class DamageOverTime extends Modifier {
 	public void applyBuff(Player damager, Entity entity) {
 		if (!(getCurrentBuffs().contains(entity))) {
 			getCurrentBuffs().add(entity);
-			final Long timeUntilBuffIsGone = System.currentTimeMillis() + getDuration() - 1000;
+			final Long timeUntilBuffIsGone = System.currentTimeMillis() + (getDuration() * 1000)- 1000;
 			new RunSchedular(getCurrentBuffs(), timeUntilBuffIsGone, getInterval(), damager, entity, getIntensity(),
 					getTarget());
 		} else {

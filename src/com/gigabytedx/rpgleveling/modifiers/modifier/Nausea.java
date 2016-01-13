@@ -11,7 +11,7 @@ import com.gigabytedx.rpgleveling.modifiers.Modifier;
 
 public class Nausea extends Modifier{
 	
-	public Nausea(Main plugin, String name, double rate, Long duration, Long interval, double intensity, String type,
+	public Nausea(Main plugin, String name, double rate, int duration, Long interval, double intensity, String type,
 			String target, String trigger, String modifierType) {
 		super(plugin, name, rate, duration, interval, intensity, type, target, trigger, modifierType);
 		// TODO Auto-generated constructor stub
@@ -23,10 +23,10 @@ public class Nausea extends Modifier{
 			if(getTrigger().equals("hold") || getTrigger().equals("have"))
 				player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, Integer.MAX_VALUE, (int) getIntensity()));
 			else
-				player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, (int) (getDuration()/1000), (int) getIntensity()));
+				player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, getDuration() * 20, (int) getIntensity()));
 		}else{
 			if (entity instanceof LivingEntity) {
-				((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, (int) (getDuration()/1000*20), (int) getIntensity()),true);
+				((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, getDuration()*20, (int) getIntensity()),true);
 				System.out.println(((LivingEntity) entity).getActivePotionEffects().toString());
 			}
 		}

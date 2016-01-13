@@ -45,7 +45,7 @@ public class GetBuffs {
 			switch (buffConfSection.getString("Type")) {
 			case "damageOverTime":
 				buff = new DamageOverTime(plugin, buffName, buffConfSection.getDouble("Rate"),
-						buffConfSection.getLong("Duration"), buffConfSection.getLong("Interval"),
+						buffConfSection.getInt("Duration"), buffConfSection.getLong("Interval"),
 						buffConfSection.getDouble("Intensity"), buffConfSection.getString("type"),
 						buffConfSection.getString("Target"), buffConfSection.getString("Trigger"), "custom");
 				buffs.add(buff);
@@ -53,7 +53,7 @@ public class GetBuffs {
 				break;
 			case "slowness":
 				buff = new Slowness(plugin, buffName, buffConfSection.getDouble("Rate"),
-						buffConfSection.getLong("Duration"), buffConfSection.getLong("Interval"),
+						buffConfSection.getInt("Duration"), buffConfSection.getLong("Interval"),
 						buffConfSection.getDouble("Intensity"), buffConfSection.getString("type"),
 						buffConfSection.getString("Target"), buffConfSection.getString("Trigger"), "potion");
 				buffs.add(buff);
@@ -61,7 +61,7 @@ public class GetBuffs {
 				break;
 			case "nausea":
 				buff = new Nausea(plugin, buffName, buffConfSection.getDouble("Rate"),
-						buffConfSection.getLong("Duration"), buffConfSection.getLong("Interval"),
+						buffConfSection.getInt("Duration"), buffConfSection.getLong("Interval"),
 						buffConfSection.getDouble("Intensity"), buffConfSection.getString("type"),
 						buffConfSection.getString("Target"), buffConfSection.getString("Trigger"), "potion");
 				buffs.add(buff);
@@ -69,7 +69,7 @@ public class GetBuffs {
 				break;
 			case "blind":
 				buff = new Blind(plugin, buffName, buffConfSection.getDouble("Rate"),
-						buffConfSection.getLong("Duration"), buffConfSection.getLong("Interval"),
+						buffConfSection.getInt("Duration"), buffConfSection.getLong("Interval"),
 						buffConfSection.getDouble("Intensity"), buffConfSection.getString("type"),
 						buffConfSection.getString("Target"), buffConfSection.getString("Trigger"), "potion");
 				buffs.add(buff);
@@ -77,7 +77,7 @@ public class GetBuffs {
 				break;
 			case "poison":
 				buff = new Poison(plugin, buffName, buffConfSection.getDouble("Rate"),
-						buffConfSection.getLong("Duration"), buffConfSection.getLong("Interval"),
+						buffConfSection.getInt("Duration"), buffConfSection.getLong("Interval"),
 						buffConfSection.getDouble("Intensity"), buffConfSection.getString("type"),
 						buffConfSection.getString("Target"), buffConfSection.getString("Trigger"), "potion");
 				buffs.add(buff);
@@ -85,7 +85,7 @@ public class GetBuffs {
 				break;
 			case "chameleon":
 				buff = new Chameleon(plugin, buffName, buffConfSection.getDouble("Rate"),
-						buffConfSection.getLong("Duration"), buffConfSection.getLong("Interval"),
+						buffConfSection.getInt("Duration"), buffConfSection.getLong("Interval"),
 						buffConfSection.getDouble("Intensity"), buffConfSection.getString("type"),
 						buffConfSection.getString("Target"), buffConfSection.getString("Trigger"), "potion");
 				buffs.add(buff);
@@ -93,7 +93,7 @@ public class GetBuffs {
 				break;
 			case "speed":
 				buff = new Speed(plugin, buffName, buffConfSection.getDouble("Rate"),
-						buffConfSection.getLong("Duration"), buffConfSection.getLong("Interval"),
+						buffConfSection.getInt("Duration"), buffConfSection.getLong("Interval"),
 						buffConfSection.getDouble("Intensity"), buffConfSection.getString("type"),
 						buffConfSection.getString("Target"), buffConfSection.getString("Trigger"), "potion");
 				buffs.add(buff);
@@ -102,7 +102,7 @@ public class GetBuffs {
 			case "healthboost":
 				System.out.println("|||||||||||||||||||||||||||||||||||||||||||");
 				buff = new HealthIncrease(plugin, buffName, buffConfSection.getDouble("Rate"),
-						buffConfSection.getLong("Duration"), buffConfSection.getLong("Interval"),
+						buffConfSection.getInt("Duration"), buffConfSection.getLong("Interval"),
 						buffConfSection.getDouble("Intensity"), buffConfSection.getString("type"),
 						buffConfSection.getString("Target"), buffConfSection.getString("Trigger"), "potion");
 				buffs.add(buff);
@@ -133,7 +133,7 @@ public class GetBuffs {
 			switch (debuffConfSection.getString("Type")) {
 			case "slowness":
 				buff = new Slowness(plugin, buffName, debuffConfSection.getDouble("Rate"),
-						debuffConfSection.getLong("Duration"), debuffConfSection.getLong("Interval"),
+						debuffConfSection.getInt("Duration"), debuffConfSection.getLong("Interval"),
 						debuffConfSection.getDouble("Intensity"), debuffConfSection.getString("type"),
 						debuffConfSection.getString("Target"), debuffConfSection.getString("Trigger"), "potion");
 				debuffs.add(buff);
@@ -141,7 +141,7 @@ public class GetBuffs {
 				break;
 			case "miningfatigue":
 				buff = new MiningFatigue(plugin, buffName, debuffConfSection.getDouble("Rate"),
-						debuffConfSection.getLong("Duration"), debuffConfSection.getLong("Interval"),
+						debuffConfSection.getInt("Duration"), debuffConfSection.getLong("Interval"),
 						debuffConfSection.getDouble("Intensity"), debuffConfSection.getString("type"),
 						debuffConfSection.getString("Target"), debuffConfSection.getString("Trigger"), "potion");
 				debuffs.add(buff);

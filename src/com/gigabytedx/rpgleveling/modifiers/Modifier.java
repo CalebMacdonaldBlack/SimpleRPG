@@ -10,7 +10,7 @@ import com.gigabytedx.rpgleveling.Main;
 
 public class Modifier {
 	double rate;
-	Long duration;
+	int duration;
 	Long interval;
 	double intensity;
 	String type;
@@ -30,7 +30,7 @@ public class Modifier {
 		return rate;
 	}
 
-	public Long getDuration() {
+	public int getDuration() {
 		return duration;
 	}
 
@@ -66,7 +66,7 @@ public class Modifier {
 		return modifierType;
 	}
 
-	public Modifier(Main plugin, String name, double rate, Long duration, Long interval, double intensity, String type,
+	public Modifier(Main plugin, String name, double rate, int duration, Long interval, double intensity, String type,
 			String target, String trigger, String modifierType) {
 		super();
 		this.plugin = plugin;

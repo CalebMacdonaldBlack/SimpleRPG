@@ -11,7 +11,7 @@ import com.gigabytedx.rpgleveling.modifiers.Modifier;
 
 public class HealthIncrease extends Modifier {
 
-	public HealthIncrease(Main plugin, String name, double rate, Long duration, Long interval, double intensity,
+	public HealthIncrease(Main plugin, String name, double rate, int duration, Long interval, double intensity,
 			String type, String target, String trigger, String modifierType) {
 		super(plugin, name, rate, duration, interval, intensity, type, target, trigger, modifierType);
 	}
