@@ -28,9 +28,8 @@ public class Cooldown {
 		this.player = player;
 		this.plugin = plugin;
 		cooldown = this;
-		
-			System.out.println("succsess");
-			runCooldown();
+
+		runCooldown();
 	}
 
 	private void runCooldown() {
@@ -45,7 +44,6 @@ public class Cooldown {
 				ItemMeta im = is.getItemMeta();
 				im.setDisplayName(ChatColor.GOLD + "Cooldown: " + ChatColor.DARK_RED + count);
 				is.setItemMeta(im);
-				System.out.println(count);
 				player.getInventory().setItem(itemSlot, is);
 
 				if (count == 0) {

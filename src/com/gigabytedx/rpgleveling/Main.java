@@ -16,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gigabytedx.rpgleveling.Mobs.GetMobData;
 import com.gigabytedx.rpgleveling.cooldowns.PlayerCooldowns;
+import com.gigabytedx.rpgleveling.events.BlockPlace;
 import com.gigabytedx.rpgleveling.events.EnitityDeath;
 import com.gigabytedx.rpgleveling.events.EntitySpawn;
 import com.gigabytedx.rpgleveling.events.Interact;
@@ -89,6 +90,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new EntitySpawn(this), this);
 		pm.registerEvents(new InventoryInteract(this), this);
 		pm.registerEvents(new Potions(), this);
+		pm.registerEvents(new BlockPlace(this), this);
 	}
 
 	private void registerCommands() {

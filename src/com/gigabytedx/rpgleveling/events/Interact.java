@@ -9,6 +9,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -17,7 +18,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.gigabytedx.rpgleveling.Main;
+import com.gigabytedx.rpgleveling.cooldowns.Cooldown;
 import com.gigabytedx.rpgleveling.item.Item;
+import com.gigabytedx.rpgleveling.item.PotionItem;
 import com.gigabytedx.rpgleveling.modifiers.Modifier;
 import com.gigabytedx.rpgleveling.shop.Shop;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -31,8 +34,10 @@ public class Interact implements Listener {
 		this.plugin = plugin;
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void itemInteract(PlayerInteractEvent event) {
+
 		try {
 			Item itemUsed = Main.itemMap.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName());
 
@@ -43,11 +48,37 @@ public class Interact implements Listener {
 						+ ChatColor.DARK_RED
 						+ " is not being used effectively because you do not have enough " + Main.itemMap
 								.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName()).getBaseClass()
-						+ " items equipped");
+						+ " items equipped!");
+				event.getPlayer().updateInventory();
+				return;
 			}
 
 		} catch (NullPointerException e) {
 
+		}
+
+		try {
+			if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+				if (Main.itemMap
+						.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName()) instanceof PotionItem) {
+					try {
+						for (Cooldown coolDown : plugin.playerCooldowns.getCooldownMap().get(event.getPlayer())) {
+							if ((ChatColor.BLUE + coolDown.getItem().getName())
+									.equals(event.getPlayer().getItemInHand().getItemMeta().getDisplayName()))
+								return;
+						}
+					} catch (NullPointerException e) {
+						System.out.println("no case");
+					}
+					if (event.getPlayer().getItemInHand().getAmount() == 1) {
+						PotionItem item = (PotionItem) Main.itemMap
+								.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName());
+						plugin.playerCooldowns.addCooldown(event.getPlayer(), new Cooldown(item.getCooldown(), item,
+								event.getPlayer().getInventory().getHeldItemSlot(), event.getPlayer(), plugin));
+					}
+				}
+		} catch (NullPointerException e) {
+			System.out.println("null here bruh");
 		}
 
 	}
@@ -106,7 +137,8 @@ public class Interact implements Listener {
 							damager.sendMessage(ChatColor.GOLD + "1.5x Damage for critical hit!");
 						} else {
 							System.out.println("DMAGE: " + itemUsed.getDamage());
-							applyDamage((LivingEntity) event.getEntity(), itemUsed.getDamage(), (Player) arrow.getShooter());
+							applyDamage((LivingEntity) event.getEntity(), itemUsed.getDamage(),
+									(Player) arrow.getShooter());
 						}
 					} catch (NullPointerException e) {
 					}
@@ -129,7 +161,8 @@ public class Interact implements Listener {
 					applyDamage((Player) event.getEntity(),
 							plugin.MobSpawningData
 									.getConfigurationSection("Regions." + prArray[0].getId() + ".SpawnableMobs." + name)
-									.getInt("Attack"), null);
+									.getInt("Attack"),
+							null);
 				} else {
 					((LivingEntity) event.getEntity()).damage(plugin.MobSpawningData
 							.getConfigurationSection("Regions." + prArray[0].getId() + ".SpawnableMobs." + name)
@@ -170,8 +203,8 @@ public class Interact implements Listener {
 		double dmgToSubtract = armorProtectionValue / 100 * damage;
 		damage -= dmgToSubtract;
 		try {
-			for(PotionEffect effect: player.getActivePotionEffects()){
-				if(effect.getType().equals(PotionEffectType.INCREASE_DAMAGE)){
+			for (PotionEffect effect : player.getActivePotionEffects()) {
+				if (effect.getType().equals(PotionEffectType.INCREASE_DAMAGE)) {
 					damage = damage + ((1 + effect.getAmplifier()) * 1.3);
 				}
 			}

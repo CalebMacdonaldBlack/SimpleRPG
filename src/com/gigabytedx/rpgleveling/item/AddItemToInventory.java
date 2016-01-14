@@ -58,9 +58,12 @@ public class AddItemToInventory {
 		lore.add(ChatColor.GOLD + "Cost: " + ChatColor.DARK_PURPLE + item.getCost());
 		lore.add("");
 		lore.add(ChatColor.BLUE + "Class: " + ChatColor.DARK_PURPLE + item.getBaseClass());
-		lore.add(ChatColor.BLUE + "Amount of class gear to use this: " + ChatColor.DARK_PURPLE
+		lore.add(ChatColor.BLUE + item.getBaseClass() +" gear needed to use this: " + ChatColor.DARK_PURPLE
 				+ item.getClassLevelRequirement());
-		lore.add("");
+		if (item instanceof PotionItem) {
+			lore.add(ChatColor.BLUE + "Cooldown: " + ChatColor.DARK_PURPLE + ((PotionItem) item).getCooldown());
+			lore.add("");
+		}
 
 		try {
 			String[] words = loreText.split("\\s+");
@@ -147,10 +150,12 @@ public class AddItemToInventory {
 
 		lore.add("");
 		lore.add(ChatColor.BLUE + "Class: " + ChatColor.DARK_PURPLE + item.getBaseClass());
-		lore.add(ChatColor.BLUE + "Amount of class gear to use this: " + ChatColor.DARK_PURPLE
+		lore.add(ChatColor.BLUE + item.getBaseClass() +" gear needed to use this: " + ChatColor.DARK_PURPLE
 				+ item.getClassLevelRequirement());
-		lore.add("");
-
+		if (item instanceof PotionItem) {
+			lore.add(ChatColor.BLUE + "Cooldown: " + ChatColor.DARK_PURPLE + ((PotionItem) item).getCooldown());
+			lore.add("");
+		}
 		try {
 			String[] words = loreText.split("\\s+");
 

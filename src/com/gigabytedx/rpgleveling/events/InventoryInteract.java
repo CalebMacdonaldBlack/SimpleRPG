@@ -7,7 +7,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -15,7 +14,6 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -219,33 +217,6 @@ public class InventoryInteract implements Listener {
 			}
 		} catch (NullPointerException e) {
 
-		}
-	}
-
-	@EventHandler
-	public void onPlayerInteract(PlayerInteractEvent event) {
-		try {
-			if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)
-				if (Main.itemMap
-						.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName()) instanceof PotionItem) {
-					try {
-						for (Cooldown coolDown : plugin.playerCooldowns.getCooldownMap().get(event.getPlayer())) {
-							if ((ChatColor.BLUE + coolDown.getItem().getName())
-									.equals(event.getPlayer().getItemInHand().getItemMeta().getDisplayName()))
-								return;
-						}
-					} catch (NullPointerException e) {
-						System.out.println("no case");
-					}
-					if (event.getPlayer().getItemInHand().getAmount()==1) {
-						PotionItem item = (PotionItem) Main.itemMap
-								.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName());
-						plugin.playerCooldowns.addCooldown(event.getPlayer(), new Cooldown(item.getCooldown(), item,
-								event.getPlayer().getInventory().getHeldItemSlot(), event.getPlayer(), plugin));
-					}
-				}
-		} catch (NullPointerException e) {
-			System.out.println("null here bruh");
 		}
 	}
 
