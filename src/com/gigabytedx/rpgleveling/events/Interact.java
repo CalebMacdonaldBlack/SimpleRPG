@@ -3,6 +3,7 @@ package com.gigabytedx.rpgleveling.events;
 import java.util.Set;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
@@ -37,7 +38,9 @@ public class Interact implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void itemInteract(PlayerInteractEvent event) {
-
+		if(event.getPlayer().getGameMode().equals(GameMode.CREATIVE)){
+			return;
+		}
 		try {
 			Item itemUsed = Main.itemMap.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName());
 
@@ -144,7 +147,6 @@ public class Interact implements Listener {
 					}
 				}
 			}
-			System.out.println("CANCELLS");
 			event.setCancelled(true);
 		} else if (event.getDamager() instanceof LivingEntity) {
 			Set<ProtectedRegion> protectedRegions = WorldGuardPlugin.inst()
@@ -217,6 +219,9 @@ public class Interact implements Listener {
 
 	@EventHandler
 	public void onInteract(PlayerInteractAtEntityEvent event) {
+		if(event.getPlayer().getGameMode().equals(GameMode.CREATIVE)){
+			return;
+		}
 		if (event.getRightClicked() instanceof Player) {
 			Player getPersonClicked = (Player) event.getRightClicked();
 			if (plugin.locations.getLocationNames().contains(getPersonClicked.getName().toLowerCase())) {

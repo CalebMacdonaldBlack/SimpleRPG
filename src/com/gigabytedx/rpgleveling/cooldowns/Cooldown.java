@@ -42,7 +42,8 @@ public class Cooldown {
 
 				ItemStack is = new ItemStack(Material.BARRIER);
 				ItemMeta im = is.getItemMeta();
-				im.setDisplayName(ChatColor.GOLD + "Cooldown: " + ChatColor.DARK_RED + count);
+				im.setDisplayName(ChatColor.GOLD + "Cooldown: " + ChatColor.DARK_RED + count + ChatColor.BLUE + " - "
+						+ item.getName());
 				is.setItemMeta(im);
 				player.getInventory().setItem(itemSlot, is);
 

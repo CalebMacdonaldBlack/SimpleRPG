@@ -3,6 +3,7 @@ package com.gigabytedx.rpgleveling.events;
 import java.util.Map;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,12 +37,12 @@ public class InventoryInteract implements Listener {
 
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event) {
-		System.out.println("fired");
+		if (event.getWhoClicked().getGameMode().equals(GameMode.CREATIVE)) {
+			return;
+		}
 		if (event.getView().getTopInventory().getTitle().contains("vender")) {
-			System.out.println("vender found");
 			if (event.getClick().equals(ClickType.LEFT)
 					&& event.getRawSlot() < event.getView().getTopInventory().getSize()) {
-				System.out.println("corrent timem");
 				shopOpenEvent(event);
 				return;
 			}
@@ -131,6 +132,9 @@ public class InventoryInteract implements Listener {
 	}
 
 	private void shopOpenEvent(InventoryClickEvent event) {
+		if (event.getWhoClicked().getGameMode().equals(GameMode.CREATIVE)) {
+			return;
+		}
 		System.out.println("NAME " + event.getCurrentItem().getItemMeta().getDisplayName());
 		System.out.println("LIST: " + Main.itemMap.keySet().toString());
 		Item item = Main.itemMap.get(event.getCurrentItem().getItemMeta().getDisplayName());
@@ -197,6 +201,9 @@ public class InventoryInteract implements Listener {
 
 	@EventHandler
 	public void onInventoryDrag(InventoryDragEvent event) {
+		if (event.getWhoClicked().getGameMode().equals(GameMode.CREATIVE)) {
+			return;
+		}
 		try {
 			if (event.getNewItems().get(0).getItemMeta().getDisplayName().contains(ChatColor.BLUE + "")) {
 				if (Main.itemMap.get(event.getNewItems().get(0).getItemMeta().getDisplayName()) instanceof PotionItem) {
@@ -222,11 +229,17 @@ public class InventoryInteract implements Listener {
 
 	@EventHandler
 	public void dropItemEvent(PlayerDropItemEvent event) {
+		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
+			return;
+		}
 		event.setCancelled(true);
 	}
 
 	@EventHandler
 	public void onHoldItemInHand(PlayerItemHeldEvent event) {
+		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
+			return;
+		}
 
 		if (event.getNewSlot() > 2 && event.getNewSlot() < 9) {
 			System.out.println("canlesded mate");
@@ -290,6 +303,9 @@ public class InventoryInteract implements Listener {
 
 	@EventHandler
 	public void onInventory(InventoryCloseEvent event) {
+		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
+			return;
+		}
 		checkArmor((Player) event.getPlayer());
 		for (int itemSlot = 0; itemSlot < 9; itemSlot++) {
 			try {
@@ -345,6 +361,7 @@ public class InventoryInteract implements Listener {
 	}
 
 	private void checkArmor(Player player) {
+
 		for (PotionEffect effect : player.getActivePotionEffects()) {
 			if (effect.getDuration() > 200000) {
 				player.removePotionEffect(effect.getType());
