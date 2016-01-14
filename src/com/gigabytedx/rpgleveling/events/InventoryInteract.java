@@ -237,12 +237,15 @@ public class InventoryInteract implements Listener {
 					} catch (NullPointerException e) {
 						System.out.println("no case");
 					}
-					PotionItem item = (PotionItem) Main.itemMap
-							.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName());
-					plugin.playerCooldowns.addCooldown(event.getPlayer(), new Cooldown(item.getCooldown(), item,
-							event.getPlayer().getInventory().getHeldItemSlot(), event.getPlayer(), plugin));
+					if (event.getPlayer().getItemInHand().getAmount()==1) {
+						PotionItem item = (PotionItem) Main.itemMap
+								.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName());
+						plugin.playerCooldowns.addCooldown(event.getPlayer(), new Cooldown(item.getCooldown(), item,
+								event.getPlayer().getInventory().getHeldItemSlot(), event.getPlayer(), plugin));
+					}
 				}
 		} catch (NullPointerException e) {
+			System.out.println("null here bruh");
 		}
 	}
 

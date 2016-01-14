@@ -1,20 +1,25 @@
 package com.gigabytedx.rpgleveling.cooldowns;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gigabytedx.rpgleveling.Main;
 import com.gigabytedx.rpgleveling.item.AddItemToInventory;
 import com.gigabytedx.rpgleveling.item.Item;
 import com.gigabytedx.rpgleveling.item.PotionItem;
 
-public class Cooldown{
+public class Cooldown {
 	int duration;
 	Item item;
 	int itemSlot;
 	Player player;
 	Main plugin;
 	Cooldown cooldown;
+	int schedularId;
 
 	public Cooldown(int i, Item item, int itemSlot, Player player, Main plugin) {
 		this.duration = i;
@@ -24,14 +29,32 @@ public class Cooldown{
 		this.plugin = plugin;
 		cooldown = this;
 		
-		runCooldown();
+			System.out.println("succsess");
+			runCooldown();
 	}
 
 	private void runCooldown() {
-		Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+		schedularId = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+			int count = duration;
 
 			@Override
 			public void run() {
+				count--;
+
+				ItemStack is = new ItemStack(Material.BARRIER);
+				ItemMeta im = is.getItemMeta();
+				im.setDisplayName(ChatColor.GOLD + "Cooldown: " + ChatColor.DARK_RED + count);
+				is.setItemMeta(im);
+				System.out.println(count);
+				player.getInventory().setItem(itemSlot, is);
+
+				if (count == 0) {
+					finish();
+					Bukkit.getScheduler().cancelTask(schedularId);
+				}
+			}
+
+			private void finish() {
 				if (item instanceof PotionItem)
 					player.getInventory().setItem(itemSlot, ((PotionItem) item).getPotion());
 				else {
@@ -39,7 +62,7 @@ public class Cooldown{
 				}
 				plugin.playerCooldowns.getCooldownMap().get(player).remove(cooldown);
 			}
-		}, duration * 20);
+		}, 0, 20);
 	}
 
 	public int getDuration() {

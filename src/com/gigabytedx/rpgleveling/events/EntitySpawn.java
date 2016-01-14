@@ -84,7 +84,6 @@ public class EntitySpawn implements Listener {
 				}
 				Random random = new Random();
 				int randomIndex = random.nextInt(mobDataRandomPool.size());
-
 				EntityType type = EntityType.valueOf(mobDataRandomPool.get(randomIndex).getType());
 				LivingEntity mob = (LivingEntity) event.getLocation().getWorld().spawnEntity(event.getLocation(), type);
 				mob.setCustomName(
