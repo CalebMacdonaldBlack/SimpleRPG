@@ -38,14 +38,17 @@ public class Interact implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void itemInteract(PlayerInteractEvent event) {
-		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName()))
+		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName())){
+			System.out.println("notfiring");
 			return;
+		}
 		if(event.getPlayer().getGameMode().equals(GameMode.CREATIVE)){
+			System.out.println("notfiring2");
 			return;
 		}
 		try {
 			Item itemUsed = Main.itemMap.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName());
-
+			System.out.println(itemUsed.getBaseClass());
 			if (plugin.itemClassValue.getBaseClassValues(event.getPlayer()).get(itemUsed.getBaseClass()) < Main.itemMap
 					.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName()).getClassLevelRequirement()) {
 				event.setCancelled(true);
@@ -59,7 +62,7 @@ public class Interact implements Listener {
 			}
 
 		} catch (NullPointerException e) {
-
+			e.printStackTrace();
 		}
 
 		try {

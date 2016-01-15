@@ -68,10 +68,11 @@ public class Main extends JavaPlugin {
 		registerEvents();
 		registerConfig();
 		logger.info(pdfFile.getName() + " has been enabled (V." + pdfFile.getVersion() + ")");
+		itemClassValue = new ItemClassValue(this);
 		loadFiles(MobSpawningDataFile, MobSpawningData);
 		loadFiles(playerFoundItemsFile, playerFoundItemsConfig);
 		new GetMobData(this);
-		itemClassValue = new ItemClassValue(this);
+		
 	}
 
 	public void onDisable() {

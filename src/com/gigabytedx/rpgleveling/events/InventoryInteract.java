@@ -268,10 +268,10 @@ public class InventoryInteract implements Listener {
 			} catch (NullPointerException e) {
 				continue;
 			}
+			try{
 				System.out.println(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName());
 				ItemClassValue icv = new ItemClassValue(plugin);
 				Map<String, Integer> baseClassValue = icv.getBaseClassValues(event.getPlayer());
-				System.out.println(baseClassValue.toString());
 				String baseClassForItem = Main.itemMap
 						.get(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName())
 						.getBaseClass();
@@ -312,6 +312,9 @@ public class InventoryInteract implements Listener {
 						}
 					}
 				}
+			}catch(NullPointerException e){
+				
+			}
 		}
 
 	}
