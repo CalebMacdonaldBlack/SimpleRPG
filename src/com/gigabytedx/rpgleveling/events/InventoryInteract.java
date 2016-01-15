@@ -24,6 +24,7 @@ import com.gigabytedx.rpgleveling.Main;
 import com.gigabytedx.rpgleveling.cooldowns.Cooldown;
 import com.gigabytedx.rpgleveling.item.AddItemToInventory;
 import com.gigabytedx.rpgleveling.item.Item;
+import com.gigabytedx.rpgleveling.item.ItemClassValue;
 import com.gigabytedx.rpgleveling.item.PotionItem;
 import com.gigabytedx.rpgleveling.modifiers.Modifier;
 import com.gigabytedx.rpgleveling.modifiers.modifier.HealthIncrease;
@@ -37,6 +38,8 @@ public class InventoryInteract implements Listener {
 
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event) {
+		if (!plugin.getConfig().getString("world name").equals(event.getWhoClicked().getLocation().getWorld().getName()))
+			return;
 		if (event.getWhoClicked().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}
@@ -130,7 +133,7 @@ public class InventoryInteract implements Listener {
 			}
 		}
 	}
-
+	//not an event, just passes an event
 	private void shopOpenEvent(InventoryClickEvent event) {
 		if (event.getWhoClicked().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
@@ -201,6 +204,8 @@ public class InventoryInteract implements Listener {
 
 	@EventHandler
 	public void onInventoryDrag(InventoryDragEvent event) {
+		if (!plugin.getConfig().getString("world name").equals(event.getWhoClicked().getLocation().getWorld().getName()))
+			return;
 		if (event.getWhoClicked().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}
@@ -229,6 +234,8 @@ public class InventoryInteract implements Listener {
 
 	@EventHandler
 	public void dropItemEvent(PlayerDropItemEvent event) {
+		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName()))
+			return;
 		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}
@@ -237,7 +244,13 @@ public class InventoryInteract implements Listener {
 
 	@EventHandler
 	public void onHoldItemInHand(PlayerItemHeldEvent event) {
+		System.out.println("ITEMHELDEVENT");
+		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName())){
+			System.out.println("REETURNING");
+			return;
+		}
 		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
+			System.out.println("REETURNING222");
 			return;
 		}
 
@@ -247,13 +260,17 @@ public class InventoryInteract implements Listener {
 		}
 
 		checkArmor(event.getPlayer());
+		Item itemUsed;
 		for (int itemSlot = 0; itemSlot < 8; itemSlot++) {
 			try {
-				Item itemUsed = Main.itemMap
+				itemUsed = Main.itemMap
 						.get(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName());
+			} catch (NullPointerException e) {
+				continue;
+			}
 				System.out.println(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName());
-
-				Map<String, Integer> baseClassValue = plugin.itemClassValue.getBaseClassValues(event.getPlayer());
+				ItemClassValue icv = new ItemClassValue(plugin);
+				Map<String, Integer> baseClassValue = icv.getBaseClassValues(event.getPlayer());
 				System.out.println(baseClassValue.toString());
 				String baseClassForItem = Main.itemMap
 						.get(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName())
@@ -295,14 +312,14 @@ public class InventoryInteract implements Listener {
 						}
 					}
 				}
-			} catch (NullPointerException e) {
-			}
 		}
 
 	}
 
 	@EventHandler
 	public void onInventory(InventoryCloseEvent event) {
+		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName()))
+			return;
 		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}

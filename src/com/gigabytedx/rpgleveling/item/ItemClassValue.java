@@ -40,7 +40,7 @@ public class ItemClassValue {
 
 			}
 		}
-
+		System.out.println(classValues.toString());
 		return classValues;
 
 	}

@@ -89,7 +89,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new PlayerRespawn(this), this);
 		pm.registerEvents(new EntitySpawn(this), this);
 		pm.registerEvents(new InventoryInteract(this), this);
-		pm.registerEvents(new Potions(), this);
+		pm.registerEvents(new Potions(this), this);
 		pm.registerEvents(new BlockPlace(this), this);
 	}
 

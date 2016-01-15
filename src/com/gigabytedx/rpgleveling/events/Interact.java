@@ -38,6 +38,8 @@ public class Interact implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void itemInteract(PlayerInteractEvent event) {
+		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName()))
+			return;
 		if(event.getPlayer().getGameMode().equals(GameMode.CREATIVE)){
 			return;
 		}
@@ -88,6 +90,8 @@ public class Interact implements Listener {
 
 	@EventHandler
 	public void onHit(EntityDamageByEntityEvent event) {
+		if (!plugin.getConfig().getString("world name").equals(event.getEntity().getLocation().getWorld().getName()))
+			return;
 		if (event.getDamager() instanceof Player) {
 			System.out.println("Here");
 			Player damager = (Player) event.getDamager();
@@ -219,6 +223,8 @@ public class Interact implements Listener {
 
 	@EventHandler
 	public void onInteract(PlayerInteractAtEntityEvent event) {
+		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName()))
+			return;
 		if(event.getPlayer().getGameMode().equals(GameMode.CREATIVE)){
 			return;
 		}

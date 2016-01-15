@@ -34,6 +34,8 @@ public class EnitityDeath implements Listener {
 
 	@EventHandler
 	public void onEntityDeath(EntityDeathEvent event) {
+		if (!plugin.getConfig().getString("world name").equals(event.getEntity().getLocation().getWorld().getName()))
+			return;
 		try {
 			if (event.getEntity().getKiller() instanceof Player && !(lastDead.equals(event.getEntity()))) {
 				lastDead = event.getEntity();
@@ -47,6 +49,8 @@ public class EnitityDeath implements Listener {
 	}
 
 	private void setDrops(EntityDeathEvent event) {
+		if (!plugin.getConfig().getString("world name").equals(event.getEntity().getLocation().getWorld().getName()))
+			return;
 		try {
 			Set<ProtectedRegion> protectedRegions = WorldGuardPlugin.inst()
 					.getRegionManager(event.getEntity().getLocation().getWorld())

@@ -1,3 +1,4 @@
+world name: RPGSpawn
 skills: 
   tank:
     items:
@@ -37,7 +38,7 @@ skills:
       - Chain Boots
 Items:
   Splash Regeneration:
-    Location: spawn
+    Location: spawn_vender
     Type: POTION
     Lore: Regeneration Potion to increase health.
     Cost: 10
@@ -53,7 +54,7 @@ Items:
     Base Class: Healer
     Class Level Requirement: 5
   Splash DPS:
-    Location: spawn
+    Location: spawn_vender
     Type: POTION
     Lore: Potion of damage. Be careful not to friendly fire!
     Cost: 10
@@ -69,7 +70,7 @@ Items:
     Base Class: DPS
     Class Level Requirement: 5
   Splash Strength:
-    Location: spawn
+    Location: spawn_vender
     Type: POTION
     Lore: Deal extra damage!
     Cost: 10
@@ -85,7 +86,7 @@ Items:
     Base Class: DPS
     Class Level Requirement: 5
   Splash Speed:
-    Location: spawn
+    Location: spawn_vender
     Type: POTION
     Lore: An old, damaged helmet, It'll do though.
     Cost: 10
@@ -94,14 +95,14 @@ Items:
     Duration: 10
     Potency: 2
     Potion Icon: SPEED 
-    Splash: false
+    Splash: true
     Qty: 3
     Cooldown: 20
     Potion Type: SPEED
     Base Class: Bard
     Class Level Requirement: 5
   Splash Healing:
-    Location: spawn
+    Location: spawn_vender
     Type: POTION
     Lore: An old, damaged helmet, It'll do though.
     Cost: 10
@@ -117,7 +118,7 @@ Items:
     Base Class: Healer
     Class Level Requirement: 5
   Splash Fire Resistance:
-    Location: spawn
+    Location: spawn_vender
     Type: POTION
     Lore: An old, damaged helmet, It'll do though.
     Cost: 10
@@ -133,7 +134,7 @@ Items:
     Base Class: Bard
     Class Level Requirement: 5
   Splash Damage Resistance:
-    Location: spawn
+    Location: spawn_vender
     Type: POTION
     Lore: An old, damaged helmet, It'll do though.
     Cost: 10
@@ -149,7 +150,7 @@ Items:
     Base Class: Tank
     Class Level Requirement: 5
   Leather Helmet:
-    Location: spawn
+    Location: spawn_vender
     Type: LEATHER_HELMET
     Lore: An old, damaged helmet, It'll do though.
     Enchanted: false
@@ -160,7 +161,7 @@ Items:
     Base Class: DPS
     Class Level Requirement: 5
   Leather Chestplate:
-    Location: spawn
+    Location: spawn_vender
     Type: LEATHER_CHESTPLATE
     Lore: An old, damaged chestpiece. It'll do though.
     Enchanted: false
@@ -171,7 +172,7 @@ Items:
     Base Class: DPS
     Class Level Requirement: 5
   Leather Leggings:
-    Location: spawn
+    Location: spawn_vender
     Type: LEATHER_LEGGINGS
     Lore: An old, damaged set of legs. It'll do though.
     Enchanted: false
@@ -182,7 +183,7 @@ Items:
     Base Class: DPS
     Class Level Requirement: 5
   Leather Boots:
-    Location: spawn
+    Location: spawn_vender
     Type: LEATHER_BOOTS
     Lore: An old, damaged set of boots. It'll do though.
     Enchanted: false
@@ -193,7 +194,7 @@ Items:
     Base Class: DPS
     Class Level Requirement: 5
   Iron Helmet:
-    Location: spawn
+    Location: spawn_vender
     Type: IRON_HELMET
     Lore: An old, damaged helmet, It'll do though.
     Enchanted: false
@@ -204,7 +205,7 @@ Items:
     Base Class: Healer
     Class Level Requirement: 5
   Iron Chestplate:
-    Location: spawn
+    Location: spawn_vender
     Type: IRON_CHESTPLATE
     Lore: An old, damaged chestpiece. It'll do though.
     Enchanted: false
@@ -215,7 +216,7 @@ Items:
     Base Class: Healer
     Class Level Requirement: 5
   Iron Leggings:
-    Location: spawn
+    Location: spawn_vender
     Type: IRON_LEGGINGS
     Lore: An old, damaged set of legs. It'll do though.
     Enchanted: false
@@ -226,7 +227,7 @@ Items:
     Base Class: Healer
     Class Level Requirement: 5
   Iron Boots:
-    Location: spawn
+    Location: spawn_vender
     Type: IRON_BOOTS
     Lore: An old, damaged set of boots. It'll do though.
     Enchanted: false
@@ -237,7 +238,7 @@ Items:
     Base Class: Healer
     Class Level Requirement: 5
   Diamond Helmet:
-    Location: spawn
+    Location: spawn_vender
     Type: DIAMOND_HELMET
     Lore: An old, damaged helmet, It'll do though.
     Enchanted: false
@@ -248,7 +249,7 @@ Items:
     Base Class: Tank
     Class Level Requirement: 5
   Diamond Chestplate:
-    Location: spawn
+    Location: spawn_vender
     Type: DIAMOND_CHESTPLATE
     Lore: An old, damaged chestpiece. It'll do though.
     Enchanted: false
@@ -259,7 +260,7 @@ Items:
     Base Class: Tank
     Class Level Requirement: 5
   Diamond Leggings:
-    Location: spawn
+    Location: spawn_vender
     Type: DIAMOND_LEGGINGS
     Lore: An old, damaged set of legs. It'll do though.
     Enchanted: false
@@ -270,7 +271,7 @@ Items:
     Base Class: Tank
     Class Level Requirement: 5
   Diamond Boots:
-    Location: spawn
+    Location: spawn_vender
     Type: DIAMOND_BOOTS
     Lore: An old, damaged set of boots. It'll do though.
     Enchanted: false
@@ -281,7 +282,7 @@ Items:
     Base Class: Tank
     Class Level Requirement: 5
   Chain Helmet:
-    Location: spawn
+    Location: spawn_vender
     Type: CHAINMAIL_HELMET
     Lore: An old, damaged helmet, It'll do though.
     Enchanted: false
@@ -292,7 +293,7 @@ Items:
     Base Class: Bard
     Class Level Requirement: 5
   Chain Chestplate:
-    Location: spawn
+    Location: spawn_vender
     Type: CHAINMAIL_CHESTPLATE
     Lore: An old, damaged chestpiece. It'll do though.
     Enchanted: false
@@ -303,7 +304,7 @@ Items:
     Base Class: Bard
     Class Level Requirement: 5
   Chain Leggings:
-    Location: spawn
+    Location: spawn_vender
     Type: CHAINMAIL_LEGGINGS
     Lore: 
     Enchanted: false
@@ -314,7 +315,7 @@ Items:
     Base Class: Bard
     Class Level Requirement: 5
   Chain Boots:
-    Location: spawn
+    Location: spawn_vender
     Type: CHAINMAIL_BOOTS
     Lore: 
     Enchanted: false
@@ -325,7 +326,7 @@ Items:
     Base Class: Bard
     Class Level Requirement: 5
   Boarding Axe:
-    Location: spawn
+    Location: spawn_vender
     Type: IRON_AXE
     Lore: A brutal axe once used with deadly efficiency by sailors
     Enchanted: true
@@ -337,7 +338,7 @@ Items:
     Base Class: Bard
     Class Level Requirement: 5
   Klamath Dagger:
-    Location: spawn
+    Location: spawn_vender
     Type: STONE_SWORD
     Lore: A foreign dagger made of stone. 
     Enchanted: true
@@ -349,7 +350,7 @@ Items:
     Base Class: DPS
     Class Level Requirement: 5
   Klamath Scimitar:
-    Location: spawn
+    Location: spawn_vender
     Type: STONE_SWORD
     Lore: A scimitar made of stone.
     Enchanted: true
@@ -361,7 +362,7 @@ Items:
     Base Class: DPS
     Class Level Requirement: 5
   Longsword:
-    Location: spawn
+    Location: spawn_vender
     Type: IRON_SWORD
     Lore: A long blade of shining steel.
     Enchanted: true
@@ -374,21 +375,21 @@ Items:
     Base Class: Tank
     Class Level Requirement: 5
   Broadsword:
-    Location: spawn
+    Location: spawn_vender
     Type: IRON_SWORD
     Lore: A brutal thick blade thats extremely heavy.
     Enchanted: true
     Cost: 650
     Buffs:
     Debuffs:
-     - Slowness2
+     - Slowness1
      - MiningFatigue
     Damage: 12
     Base Class: Tank
     Class Level Requirement: 5
   Claymore:
     Type: IRON_SWORD
-    Location: spawn
+    Location: spawn_vender
     Lore: This is a rusty iron sword crafted by a young blacksmith apprentice. It doesn't do much damage but you can tell the poor kid put hit heart and soul into it
     Enchanted: false
     Cost: 20
@@ -403,7 +404,7 @@ Items:
     Class Level Requirement: 5
   Healers Trusty Dagger:
     Type: IRON_SWORD
-    Location: spawn
+    Location: spawn_vender
     Lore: Allows the shanker to make a clean getaway
     Enchanted: false
     Cost: 20
@@ -412,6 +413,7 @@ Items:
     Debuffs:
     Base Class: Healer
     Class Level Requirement: 5
+    Damage: 6
   Chameleon Staff:
     Type: BLAZE_ROD
     Location: other
@@ -452,7 +454,7 @@ Items:
     Class Level Requirement: 5
   Long Bow:
     Type: BOW
-    Location: spawn
+    Location: spawn_vender
     Lore: The great long bow that Sir Johnathan Weathersteed rode into battle with.
     Enchanted: false
     Cost: 100
@@ -604,7 +606,7 @@ Debuffs:
     Target: player
     Trigger: hold
 Locations:
-  spawn:
+  spawn_vender:
     testoption: false
   other:
     testoption: false

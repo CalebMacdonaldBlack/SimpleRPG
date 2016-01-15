@@ -33,6 +33,8 @@ public class EntitySpawn implements Listener {
 
 	@EventHandler
 	public void onEntitySpawn(CreatureSpawnEvent event) {
+		if (!plugin.getConfig().getString("world name").equals(event.getEntity().getLocation().getWorld().getName()))
+			return;
 		if (event.getSpawnReason().equals(SpawnReason.NATURAL) || event.getSpawnReason().equals(SpawnReason.SPAWNER_EGG)) {
 			event.setCancelled(true);
 		}

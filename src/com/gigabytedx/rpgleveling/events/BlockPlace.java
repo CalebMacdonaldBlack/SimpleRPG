@@ -17,7 +17,9 @@ public class BlockPlace implements Listener {
 
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent event) {
-		if (!event.getPlayer().isOp() && event.getBlock().getType().equals(Material.BARRIER))
-			event.setCancelled(true);
+		if (!event.getPlayer().isOp() && event.getBlock().getType().equals(Material.BARRIER)) {
+			if (plugin.getConfig().getString("world name").equals(event.getBlock().getLocation().getWorld().getName()))
+				event.setCancelled(true);
+		}
 	}
 }
