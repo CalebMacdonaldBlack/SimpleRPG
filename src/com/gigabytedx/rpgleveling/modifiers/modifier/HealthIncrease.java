@@ -19,7 +19,6 @@ public class HealthIncrease extends Modifier {
 	@Override
 	public void applyBuff(Player player, Entity entity) {
 		if(getTarget().equals("player")){
-			System.out.println("SETTING");
 			if(getTrigger().equals("hold") || getTrigger().equals("have")){
 			player.setMaxHealth(20 + getIntensity());
 			}else

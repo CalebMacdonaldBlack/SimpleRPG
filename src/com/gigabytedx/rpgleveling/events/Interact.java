@@ -38,17 +38,14 @@ public class Interact implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void itemInteract(PlayerInteractEvent event) {
-		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName())){
-			System.out.println("notfiring");
+		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName())) {
 			return;
 		}
-		if(event.getPlayer().getGameMode().equals(GameMode.CREATIVE)){
-			System.out.println("notfiring2");
+		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}
 		try {
 			Item itemUsed = Main.itemMap.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName());
-			System.out.println(itemUsed.getBaseClass());
 			if (plugin.itemClassValue.getBaseClassValues(event.getPlayer()).get(itemUsed.getBaseClass()) < Main.itemMap
 					.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName()).getClassLevelRequirement()) {
 				event.setCancelled(true);
@@ -76,44 +73,33 @@ public class Interact implements Listener {
 								return;
 						}
 					} catch (NullPointerException e) {
-						System.out.println("no case");
 					}
 					if (event.getPlayer().getItemInHand().getAmount() == 1) {
-						PotionItem item = (PotionItem) Main.itemMap
-								.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName());
-						plugin.playerCooldowns.addCooldown(event.getPlayer(), new Cooldown(item.getCooldown(), item,
-								event.getPlayer().getInventory().getHeldItemSlot(), event.getPlayer(), plugin));
+						Item item = Main.itemMap.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName());
+						plugin.playerCooldowns.addCooldown(event.getPlayer(),
+								new Cooldown(((PotionItem) item).getCooldown(), item,
+										event.getPlayer().getInventory().getHeldItemSlot(), event.getPlayer(), plugin));
 					}
 				}
 		} catch (NullPointerException e) {
-			System.out.println("null here bruh");
 		}
 
 	}
 
 	@EventHandler
 	public void onHit(EntityDamageByEntityEvent event) {
+		event.setDamage(0);
 		if (!plugin.getConfig().getString("world name").equals(event.getEntity().getLocation().getWorld().getName()))
 			return;
 		if (event.getDamager() instanceof Player) {
-			System.out.println("Here");
 			Player damager = (Player) event.getDamager();
 			try {
-				System.out.println("Starting");
-				System.out.println(damager.getItemInHand().getItemMeta().getDisplayName());
 				Item itemUsed = Main.itemMap.get(damager.getItemInHand().getItemMeta().getDisplayName());
-				System.out.println("COMPARE" + itemUsed.getBaseClass());
-				System.out.println(plugin.itemClassValue.getBaseClassValues(damager).get(itemUsed.getBaseClass()));
-				System.out.println(Main.itemMap.get(damager.getItemInHand().getItemMeta().getDisplayName())
-						.getClassLevelRequirement());
-				System.out.println(damager.getItemInHand().getItemMeta().getDisplayName());
 
 				if (plugin.itemClassValue.getBaseClassValues(damager).get(itemUsed.getBaseClass()) >= Main.itemMap
 						.get(damager.getItemInHand().getItemMeta().getDisplayName()).getClassLevelRequirement()) {
-					System.out.println("We have enough");
 
 					for (Modifier buff : itemUsed.getBuffs()) {
-						System.out.println("APPLYING BUFF");
 						buff.applyBuff(damager, event.getEntity());
 					}
 					applyDamage((LivingEntity) event.getEntity(), itemUsed.getDamage(), damager);
@@ -127,7 +113,6 @@ public class Interact implements Listener {
 					return;
 				}
 			} catch (NullPointerException e) {
-				System.out.println("OI BUDDY NULL ERRE");
 				e.printStackTrace();
 			}
 
@@ -146,7 +131,6 @@ public class Interact implements Listener {
 									(Player) arrow.getShooter());
 							damager.sendMessage(ChatColor.GOLD + "1.5x Damage for critical hit!");
 						} else {
-							System.out.println("DMAGE: " + itemUsed.getDamage());
 							applyDamage((LivingEntity) event.getEntity(), itemUsed.getDamage(),
 									(Player) arrow.getShooter());
 						}
@@ -154,7 +138,6 @@ public class Interact implements Listener {
 					}
 				}
 			}
-			event.setCancelled(true);
 		} else if (event.getDamager() instanceof LivingEntity) {
 			Set<ProtectedRegion> protectedRegions = WorldGuardPlugin.inst()
 					.getRegionManager(event.getDamager().getLocation().getWorld())
@@ -178,7 +161,6 @@ public class Interact implements Listener {
 							.getInt("Attack"));
 				}
 			}
-			event.setCancelled(true);
 		}
 
 	}
@@ -228,7 +210,7 @@ public class Interact implements Listener {
 	public void onInteract(PlayerInteractAtEntityEvent event) {
 		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName()))
 			return;
-		if(event.getPlayer().getGameMode().equals(GameMode.CREATIVE)){
+		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}
 		if (event.getRightClicked() instanceof Player) {

@@ -27,7 +27,6 @@ public class Nausea extends Modifier{
 		}else{
 			if (entity instanceof LivingEntity) {
 				((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, getDuration()*20, (int) getIntensity()),true);
-				System.out.println(((LivingEntity) entity).getActivePotionEffects().toString());
 			}
 		}
 		

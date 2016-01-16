@@ -10,7 +10,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.gigabytedx.rpgleveling.Main;
 import com.gigabytedx.rpgleveling.item.AddItemToInventory;
 import com.gigabytedx.rpgleveling.item.Item;
-import com.gigabytedx.rpgleveling.item.PotionItem;
 
 public class Cooldown {
 	int duration;
@@ -54,11 +53,8 @@ public class Cooldown {
 			}
 
 			private void finish() {
-				if (item instanceof PotionItem)
-					player.getInventory().setItem(itemSlot, ((PotionItem) item).getPotion());
-				else {
-					player.getInventory().setItem(itemSlot, AddItemToInventory.getItemStack(item, plugin));
-				}
+				player.getInventory().setItem(itemSlot, AddItemToInventory.getItemStack(item, plugin));
+
 				plugin.playerCooldowns.getCooldownMap().get(player).remove(cooldown);
 			}
 		}, 0, 20);

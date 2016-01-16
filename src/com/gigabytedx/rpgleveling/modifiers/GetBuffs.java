@@ -38,7 +38,6 @@ public class GetBuffs {
 
 		// iterate through skill names
 		for (String buffName : buffConfigSectionNames) {
-			System.out.println("BUFFNAME:  " + buffName);
 			ConfigurationSection buffConfSection = main.getConfig().getConfigurationSection("Buffs")
 					.getConfigurationSection(buffName);
 			Modifier buff;
@@ -100,7 +99,6 @@ public class GetBuffs {
 				Main.buffsMap.put(buffName, buff);
 				break;
 			case "healthboost":
-				System.out.println("|||||||||||||||||||||||||||||||||||||||||||");
 				buff = new HealthIncrease(plugin, buffName, buffConfSection.getDouble("Rate"),
 						buffConfSection.getInt("Duration"), buffConfSection.getLong("Interval"),
 						buffConfSection.getDouble("Intensity"), buffConfSection.getString("type"),
@@ -109,9 +107,6 @@ public class GetBuffs {
 				Main.buffsMap.put(buffName, buff);
 				break;
 			default:
-				System.out.println("|||||||||||||||||||||||||||||||||||||||||||");
-				System.out.println("Buff Type Not found");
-				System.out.println("|||||||||||||||||||||||||||||||||||||||||||");
 				break;
 			}
 				

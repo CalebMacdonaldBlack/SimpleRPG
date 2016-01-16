@@ -21,10 +21,7 @@ public class Join implements Listener {
 
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
-		System.out.println(event.getPlayer().getLocation().getWorld().getName());
-		System.out.println(plugin.getConfig().getString("world name"));
 		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName())){
-			System.out.println("Failed the worldname check");
 			return;
 		}
 		Player player = (Player) event.getPlayer();
@@ -50,7 +47,6 @@ public class Join implements Listener {
 		for(int itemSlot = 3; itemSlot < 9; itemSlot++){
 			event.getPlayer().getInventory().setItem(itemSlot, itemStack);
 		}
-		System.out.println("got to the end");
 	}
 	
 	

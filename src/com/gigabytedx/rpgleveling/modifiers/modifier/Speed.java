@@ -24,10 +24,6 @@ public class Speed extends Modifier {
 				player.addPotionEffect(
 						new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, (int) getIntensity()));
 			else {
-				System.out.println("Trying to add pot effect");
-				player.sendMessage("ADDING POT EFECT");
-				System.out.println("DATA: " + (getDuration() / 1000) + " " + getIntensity());
-				player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 3000, 3));
 				player.addPotionEffect(
 						new PotionEffect(PotionEffectType.SPEED, getDuration() * 20, (int) getIntensity()));
 			}
@@ -35,7 +31,6 @@ public class Speed extends Modifier {
 			if (entity instanceof LivingEntity) {
 				((LivingEntity) entity).addPotionEffect(
 						new PotionEffect(PotionEffectType.SPEED, getDuration() * 20, (int) getIntensity()), true);
-				System.out.println(((LivingEntity) entity).getActivePotionEffects().toString());
 			}
 		}
 

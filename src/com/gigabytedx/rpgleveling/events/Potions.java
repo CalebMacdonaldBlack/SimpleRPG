@@ -23,12 +23,9 @@ public class Potions implements Listener{
 	public void onSplash(PotionSplashEvent event){
 		if (!plugin.getConfig().getString("world name").equals(event.getEntity().getLocation().getWorld().getName()))
 			return;
-		System.out.println("RUNNNN");
 		for(PotionEffect effect: event.getPotion().getEffects()){
 			if(effect.getType().equals(PotionEffectType.HARM)){
-				System.out.println("SHULD");
 				for(LivingEntity entity : event.getAffectedEntities()){
-					System.out.println("LOOPS:" + effect.getAmplifier());
 					
 					entity.damage(6 * (effect.getAmplifier() + 1));
 					event.setCancelled(true);

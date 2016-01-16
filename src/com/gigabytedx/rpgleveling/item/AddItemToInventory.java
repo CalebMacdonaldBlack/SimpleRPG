@@ -11,7 +11,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gigabytedx.rpgleveling.Main;
 import com.gigabytedx.rpgleveling.modifiers.Modifier;
-import com.questcraft.itemapi.ItemAPI;
 
 public class AddItemToInventory {
 
@@ -44,13 +43,13 @@ public class AddItemToInventory {
 		ItemMeta meta = itemStack.getItemMeta();
 		meta.setDisplayName(ChatColor.BLUE + item.getName());
 
-		try {
+		/*try {
 			if (item.isEnchanted()) {
 				ItemAPI.addGlow(itemStack);
 			}
 		} catch (IllegalArgumentException e) {
 
-		}
+		}*/
 		String loreText = item.getLore();
 
 		List<String> lore = new ArrayList<>();
@@ -80,7 +79,6 @@ public class AddItemToInventory {
 			}
 			lore.add(sentence);
 		} catch (NullPointerException e) {
-			System.out.println("No lore: " + item.getName());
 		}
 		if (item.getBuffs().size() > 0) {
 			lore.add(" ");
@@ -126,7 +124,6 @@ public class AddItemToInventory {
 	}
 
 	public static ItemStack getItemStack(Item item, Main plugin) {
-		System.out.println(item.getName());
 		ItemStack itemStack = new ItemStack(item.getType());
 
 		if (item instanceof PotionItem) {
@@ -136,13 +133,13 @@ public class AddItemToInventory {
 		ItemMeta meta = itemStack.getItemMeta();
 		meta.setDisplayName(ChatColor.BLUE + item.getName());
 
-		try {
-			if (item.isEnchanted()) {
-				ItemAPI.addGlow(itemStack);
-			}
-		} catch (IllegalArgumentException e) {
-
-		}
+//		try {
+//			if (item.isEnchanted()) {
+//				ItemAPI.addGlow(itemStack);
+//			}
+//		} catch (IllegalArgumentException e) {
+//
+//		}
 
 		String loreText = item.getLore();
 
@@ -171,7 +168,6 @@ public class AddItemToInventory {
 			}
 			lore.add(sentence);
 		} catch (NullPointerException e) {
-			System.out.println("No lore: " + item.getName());
 		}
 		if (item.getBuffs().size() > 0) {
 			lore.add(" ");

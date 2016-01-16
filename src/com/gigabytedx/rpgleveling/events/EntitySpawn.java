@@ -12,7 +12,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
@@ -31,7 +30,6 @@ public class EntitySpawn implements Listener {
 		this.plugin = plugin;
 	}
 
-	@EventHandler
 	public void onEntitySpawn(CreatureSpawnEvent event) {
 		if (!plugin.getConfig().getString("world name").equals(event.getEntity().getLocation().getWorld().getName()))
 			return;

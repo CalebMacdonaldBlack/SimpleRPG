@@ -244,18 +244,14 @@ public class InventoryInteract implements Listener {
 
 	@EventHandler
 	public void onHoldItemInHand(PlayerItemHeldEvent event) {
-		System.out.println("ITEMHELDEVENT");
 		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName())){
-			System.out.println("REETURNING");
 			return;
 		}
 		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
-			System.out.println("REETURNING222");
 			return;
 		}
 
 		if (event.getNewSlot() > 2 && event.getNewSlot() < 9) {
-			System.out.println("canlesded mate");
 			event.setCancelled(true);
 		}
 
@@ -269,7 +265,6 @@ public class InventoryInteract implements Listener {
 				continue;
 			}
 			try{
-				System.out.println(event.getPlayer().getInventory().getItem(itemSlot).getItemMeta().getDisplayName());
 				ItemClassValue icv = new ItemClassValue(plugin);
 				Map<String, Integer> baseClassValue = icv.getBaseClassValues(event.getPlayer());
 				String baseClassForItem = Main.itemMap
@@ -280,10 +275,8 @@ public class InventoryInteract implements Listener {
 						.getClassLevelRequirement();
 
 				if (baseClassValue.get(baseClassForItem) >= itemBaseClassLevelRequirement) {
-					System.out.println("made it this far");
 					if (itemUsed != null)
 						for (Modifier buff : itemUsed.getBuffs()) {
-							System.out.println("APPLYING BUFF: " + buff.getName());
 							if (buff.getTrigger().equals("have"))
 								buff.applyBuff(event.getPlayer(), null);
 							if (buff.getTrigger().equals("hold") && itemSlot == event.getNewSlot()) {

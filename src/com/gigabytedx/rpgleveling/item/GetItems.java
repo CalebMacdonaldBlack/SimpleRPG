@@ -69,7 +69,6 @@ public class GetItems {
 					}
 				}
 			} catch (NullPointerException e) {
-				System.out.println(itemName + " does not have any buffs");
 			}
 			try {
 				for (String debuffName : debuffNames) {
@@ -80,7 +79,6 @@ public class GetItems {
 					}
 				}
 			} catch (NullPointerException e) {
-				System.out.println(itemName + " does not have any debuffs");
 			}
 			// add new skill to list
 			items.add(new Item(itemName, lore, cost, type, enchanted, buffs, debuffs, location, damage, protection, baseClass, classLevelRequirement));

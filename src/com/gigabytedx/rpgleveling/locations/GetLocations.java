@@ -22,7 +22,6 @@ public class GetLocations {
 		for(String locationName: locationConfigSectionNames){
 			locationNames.add(locationName.toLowerCase());
 		}
-		System.out.println("LOCATIONS  " + locationNames.toString());
 	}
 
 	public List<String> getLocationNames() {
