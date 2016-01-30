@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -44,6 +45,14 @@ public class Interact implements Listener {
 		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}
+		try{
+		if(event.getPlayer().getItemInHand().getItemMeta().getDisplayName().equals(Material.STAINED_GLASS_PANE)){
+			event.setCancelled(true);
+			return;
+		}
+		}catch(NullPointerException e){
+			return;
+		}
 		try {
 			Item itemUsed = Main.itemMap.get(event.getPlayer().getItemInHand().getItemMeta().getDisplayName());
 			if (plugin.itemClassValue.getBaseClassValues(event.getPlayer()).get(itemUsed.getBaseClass()) < Main.itemMap
@@ -59,7 +68,6 @@ public class Interact implements Listener {
 			}
 
 		} catch (NullPointerException e) {
-			e.printStackTrace();
 		}
 
 		try {
@@ -208,13 +216,13 @@ public class Interact implements Listener {
 
 	@EventHandler
 	public void onInteract(PlayerInteractAtEntityEvent event) {
-		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName()))
-			return;
-		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
-			return;
-		}
-		if (event.getRightClicked() instanceof Player) {
-			Player getPersonClicked = (Player) event.getRightClicked();
+//		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName()))
+//			return;
+//		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
+//			return;
+//		}
+		if (event.getRightClicked() instanceof Villager) {
+			Villager getPersonClicked = (Villager) event.getRightClicked();
 			if (plugin.locations.getLocationNames().contains(getPersonClicked.getName().toLowerCase())) {
 				Shop.openShop(plugin, event.getPlayer(), getPersonClicked.getName());
 			}

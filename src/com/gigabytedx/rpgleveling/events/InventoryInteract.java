@@ -18,6 +18,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 
 import com.gigabytedx.rpgleveling.Main;
@@ -38,13 +39,19 @@ public class InventoryInteract implements Listener {
 
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event) {
+		System.out.println(plugin.getConfig().getString("world name"));
 		if (!plugin.getConfig().getString("world name").equals(event.getWhoClicked().getLocation().getWorld().getName()))
 			return;
 		if (event.getWhoClicked().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}
-		if (event.getView().getTopInventory().getTitle().contains("vender")) {
-			if (event.getClick().equals(ClickType.LEFT)
+		
+		if(event.getHotbarButton() > 2 && event.getHotbarButton() < 9){
+			event.setCancelled(true);
+		}
+		
+		if (event.getView().getTopInventory().getTitle().contains("Shop")) {
+			if ((event.getClick().equals(ClickType.LEFT) || event.isShiftClick())
 					&& event.getRawSlot() < event.getView().getTopInventory().getSize()) {
 				shopOpenEvent(event);
 				return;
@@ -59,10 +66,6 @@ public class InventoryInteract implements Listener {
 		} catch (NullPointerException e) {
 
 		}
-		// System.out.println("SLOT IS THIS: " + event.getRawSlot());
-		// System.out.println("OTHER SLOT IS THIS: " + event.getSlot());
-		// System.out.println("TOP SIZE: " +
-		// event.getView().getTopInventory().getSize());
 		try {
 			if (event.getSlot() < 8) {
 				if (!(plugin.playerCooldowns.getCooldownMap().get((Player) event.getWhoClicked()).isEmpty())) {
@@ -146,7 +149,6 @@ public class InventoryInteract implements Listener {
 
 		for (int itemSlot = 0; itemSlot < 40; itemSlot++) {
 			try {
-				System.out.println("SLOT: " + itemSlot + "MAXSIZE" + playerInv.getMaxStackSize());
 				if (playerInv.getItem(itemSlot).getType().equals(Material.GOLD_NUGGET)) {
 					currentGold += Main.goldNuggetWorth * playerInv.getItem(itemSlot).getAmount();
 				} else if (playerInv.getItem(itemSlot).getType().equals(Material.GOLD_INGOT)) {
@@ -252,6 +254,12 @@ public class InventoryInteract implements Listener {
 		}
 
 		if (event.getNewSlot() > 2 && event.getNewSlot() < 9) {
+			ItemStack itemStack = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7);
+			ItemMeta meta = itemStack.getItemMeta();
+			meta.setDisplayName(ChatColor.RED + "Locked ability slot");
+			itemStack.setItemMeta(meta);
+			
+			event.getPlayer().getInventory().setItem(event.getNewSlot(), itemStack);
 			event.setCancelled(true);
 		}
 
