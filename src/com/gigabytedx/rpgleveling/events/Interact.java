@@ -39,9 +39,6 @@ public class Interact implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void itemInteract(PlayerInteractEvent event) {
-		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName())) {
-			return;
-		}
 		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}
@@ -97,8 +94,6 @@ public class Interact implements Listener {
 	@EventHandler
 	public void onHit(EntityDamageByEntityEvent event) {
 		event.setDamage(0);
-		if (!plugin.getConfig().getString("world name").equals(event.getEntity().getLocation().getWorld().getName()))
-			return;
 		if (event.getDamager() instanceof Player) {
 			Player damager = (Player) event.getDamager();
 			try {
@@ -121,7 +116,6 @@ public class Interact implements Listener {
 					return;
 				}
 			} catch (NullPointerException e) {
-				e.printStackTrace();
 			}
 
 		} else if (event.getDamager() instanceof Arrow) {
@@ -214,7 +208,7 @@ public class Interact implements Listener {
 
 	}
 
-	@EventHandler
+	
 	public void onInteract(PlayerInteractAtEntityEvent event) {
 //		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName()))
 //			return;

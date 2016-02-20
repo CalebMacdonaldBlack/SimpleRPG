@@ -26,19 +26,15 @@ public class GetClass implements CommandExecutor {
 		if (sender instanceof Player) {
 			Player player = (Player) sender;
 			if (args.length == 1) {
-				System.out.println("Finding: " + "skills." + args[0].toLowerCase() + ".items");
 				List<String> itemNames = (List<String>) plugin.getConfig().getList("skills." + args[0].toLowerCase() + ".items");
-				System.out.println("item names" + itemNames.toString());
 				for (String itemName : itemNames) {
-					System.out.println("Finding item: " + ChatColor.BLUE + itemName);
-					System.out.println(Main.itemMap.keySet().toString());
 					Item item = Main.itemMap.get(ChatColor.BLUE + itemName);
 					
 					try{
 						item.getName();
 						player.getInventory().addItem(AddItemToInventory.getItemStack(item, plugin));
 					} catch(NullPointerException e) {
-						System.out.println("ERROR: Could not find " + itemName + " in the list of items. Please check the name is correct");
+						plugin.logError("Could not find " + itemName + " in the list of items. Please check the name is correct");
 					}
 				}
 

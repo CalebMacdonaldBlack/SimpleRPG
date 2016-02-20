@@ -54,12 +54,14 @@ public class Main extends JavaPlugin {
 
 	public File MobSpawningDataFile = new File(getDataFolder() + "/Data/MobSpawningData.yml");
 	public FileConfiguration MobSpawningData = YamlConfiguration.loadConfiguration(MobSpawningDataFile);
-	
+
 	public File playerFoundItemsFile = new File(getDataFolder() + "/Data/playerDataFile.yml");
 	public FileConfiguration playerFoundItemsConfig = YamlConfiguration.loadConfiguration(MobSpawningDataFile);
-	
+
 	public static final int goldBarWorth = 10;
 	public static final int goldNuggetWorth = 1;
+
+	private Logger logger;
 
 	public void onEnable() {
 		PluginDescriptionFile pdfFile = getDescription();
@@ -72,12 +74,12 @@ public class Main extends JavaPlugin {
 		loadFiles(MobSpawningDataFile, MobSpawningData);
 		loadFiles(playerFoundItemsFile, playerFoundItemsConfig);
 		new GetMobData(this);
-		
+
 	}
 
 	public void onDisable() {
 		PluginDescriptionFile pdfFile = getDescription();
-		Logger logger = getLogger();
+		logger = getLogger();
 
 		logger.info(pdfFile.getName() + " has been disabled (V." + pdfFile.getVersion() + ")");
 	}
@@ -133,6 +135,16 @@ public class Main extends JavaPlugin {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+	}
+
+	public void logError(String msg) {
+		getLogger().severe(msg);
+	}
+
+	public void logDebug(String msg) {
+		if (getConfig().getBoolean("enableDebug")) {
+			getLogger().info("[Debug] " + msg);
 		}
 	}
 }

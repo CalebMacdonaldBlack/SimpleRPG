@@ -1,5 +1,6 @@
 package commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,6 +17,7 @@ public class OpenShop implements CommandExecutor {
 		this.plugin = plugin;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (sender instanceof Player) {
@@ -24,12 +26,14 @@ public class OpenShop implements CommandExecutor {
 				Shop.openShop(plugin, player, args[0]);
 			} else {
 				sender.sendMessage(ChatColor.RED
-						+ "Syntax: /openshop <locationName> this command cannot be run through the console");
+						+ "Syntax: /openshop <locationName>");
 				sender.sendMessage(ChatColor.GOLD + "List of Locations:");
 				for (String locationName : plugin.locations.getLocationNames()) {
 					sender.sendMessage(ChatColor.DARK_GREEN + locationName);
 				}
 			}
+		}else{
+			Shop.openShop(plugin, Bukkit.getPlayer(args[0]), args[1]);
 		}
 		return false;
 	}

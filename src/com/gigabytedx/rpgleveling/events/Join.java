@@ -49,5 +49,4 @@ public class Join implements Listener {
 		}
 	}
 	
-	
 }

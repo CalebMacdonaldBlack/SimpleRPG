@@ -62,7 +62,7 @@ public class Shop {
 					inv = AddItemToInventory.addItem(inv, item, plugin, true, false);
 				}
 			} catch (NullPointerException e) {
-				System.out.println("Doesnt have a location name");
+				plugin.logError("Doesnt have a location name");
 			}
 		}
 		player.openInventory(inv);

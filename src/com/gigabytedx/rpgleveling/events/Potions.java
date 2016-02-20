@@ -13,6 +13,7 @@ import com.gigabytedx.rpgleveling.Main;
 
 public class Potions implements Listener{
 
+	@SuppressWarnings("unused")
 	private Main plugin;
 
 	public Potions(Main plugin) {
@@ -21,8 +22,6 @@ public class Potions implements Listener{
 	
 	@EventHandler
 	public void onSplash(PotionSplashEvent event){
-		if (!plugin.getConfig().getString("world name").equals(event.getEntity().getLocation().getWorld().getName()))
-			return;
 		for(PotionEffect effect: event.getPotion().getEffects()){
 			if(effect.getType().equals(PotionEffectType.HARM)){
 				for(LivingEntity entity : event.getAffectedEntities()){
@@ -36,8 +35,6 @@ public class Potions implements Listener{
 	
 	@EventHandler
 	public void throwPot(ProjectileLaunchEvent event){
-		if (!plugin.getConfig().getString("world name").equals(event.getEntity().getLocation().getWorld().getName()))
-			return;
 		if(event.getEntityType().equals(EntityType.SPLASH_POTION)){
 			event.getEntity().setVelocity(event.getEntity().getVelocity().multiply(2));
 		}

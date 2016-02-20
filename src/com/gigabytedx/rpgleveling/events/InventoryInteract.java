@@ -2,6 +2,7 @@ package com.gigabytedx.rpgleveling.events;
 
 import java.util.Map;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -39,9 +40,6 @@ public class InventoryInteract implements Listener {
 
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event) {
-		System.out.println(plugin.getConfig().getString("world name"));
-		if (!plugin.getConfig().getString("world name").equals(event.getWhoClicked().getLocation().getWorld().getName()))
-			return;
 		if (event.getWhoClicked().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}
@@ -141,8 +139,6 @@ public class InventoryInteract implements Listener {
 		if (event.getWhoClicked().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}
-		System.out.println("NAME " + event.getCurrentItem().getItemMeta().getDisplayName());
-		System.out.println("LIST: " + Main.itemMap.keySet().toString());
 		Item item = Main.itemMap.get(event.getCurrentItem().getItemMeta().getDisplayName());
 		int currentGold = 0;
 		PlayerInventory playerInv = event.getWhoClicked().getInventory();
@@ -206,8 +202,6 @@ public class InventoryInteract implements Listener {
 
 	@EventHandler
 	public void onInventoryDrag(InventoryDragEvent event) {
-		if (!plugin.getConfig().getString("world name").equals(event.getWhoClicked().getLocation().getWorld().getName()))
-			return;
 		if (event.getWhoClicked().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}
@@ -236,8 +230,6 @@ public class InventoryInteract implements Listener {
 
 	@EventHandler
 	public void dropItemEvent(PlayerDropItemEvent event) {
-		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName()))
-			return;
 		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}
@@ -246,9 +238,6 @@ public class InventoryInteract implements Listener {
 
 	@EventHandler
 	public void onHoldItemInHand(PlayerItemHeldEvent event) {
-		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName())){
-			return;
-		}
 		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}
@@ -322,8 +311,6 @@ public class InventoryInteract implements Listener {
 
 	@EventHandler
 	public void onInventory(InventoryCloseEvent event) {
-		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName()))
-			return;
 		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}
@@ -388,6 +375,10 @@ public class InventoryInteract implements Listener {
 				player.removePotionEffect(effect.getType());
 			}
 		}
+		
+		//this applys the potions for the applicible dungeons that got wiped above
+		com.gigabytedx.dungeonmachanics.Main dungeonMainClass = (com.gigabytedx.dungeonmachanics.Main) Bukkit.getPluginManager().getPlugin("dungeonmachanics");
+		dungeonMainClass.enablePotionEffects(player);
 		for (ItemStack itemStack : player.getEquipment().getArmorContents()) {
 			try {
 				for (Modifier modifier : Main.itemMap.get(itemStack.getItemMeta().getDisplayName()).getBuffs()) {

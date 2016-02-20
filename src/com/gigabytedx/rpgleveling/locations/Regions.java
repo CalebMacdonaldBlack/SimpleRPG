@@ -26,7 +26,6 @@ public class Regions {
 	}
 	
 	public boolean hasRegion(String regionName) {
-		//System.out.println("RGIONS VALUES: " + regions.keySet().toString());
 		return regions.containsKey(regionName);
 	}
 

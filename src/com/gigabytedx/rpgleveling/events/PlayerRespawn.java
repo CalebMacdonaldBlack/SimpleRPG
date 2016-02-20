@@ -21,9 +21,6 @@ public class PlayerRespawn implements Listener {
 
 	@EventHandler
 	public void onRespawn(PlayerRespawnEvent event) {
-		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName())) {
-			return;
-		}
 		Player player = (Player) event.getPlayer();
 
 		// initialize player with 0 xp if they aren't already saved in the xp

@@ -18,8 +18,6 @@ public class BlockPlace implements Listener {
 
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent event) {
-		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName()))
-			return;
 		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
 		}
@@ -30,7 +28,6 @@ public class BlockPlace implements Listener {
 		}
 		
 		if(event.getBlock().getType().equals(Material.STAINED_GLASS_PANE)){
-			System.out.println("CANSELLING");
 			event.setCancelled(true);
 		}
 	}

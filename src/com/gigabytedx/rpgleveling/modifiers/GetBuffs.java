@@ -121,7 +121,6 @@ public class GetBuffs {
 
 		// iterate through skill names
 		for (String buffName : debuffConfigSectionNames) {
-			System.out.println("DEBUFFNAME:  " + buffName);
 			ConfigurationSection debuffConfSection = main.getConfig().getConfigurationSection("Debuffs")
 					.getConfigurationSection(buffName);
 			Modifier buff;

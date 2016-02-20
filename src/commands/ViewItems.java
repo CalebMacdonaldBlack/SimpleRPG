@@ -37,7 +37,7 @@ public class ViewItems implements CommandExecutor {
 						inv = AddItemToInventory.addItem(inv, item, plugin, true, true);
 					}
 				} catch (NullPointerException e) {
-					System.out.println("Doesnt have a location name");
+					plugin.logError("Doesnt have a location name");
 				}
 			}
 			try {
