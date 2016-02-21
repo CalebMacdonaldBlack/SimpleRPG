@@ -1,10 +1,14 @@
 package com.gigabytedx.rpgleveling.events;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -15,18 +19,42 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.gigabytedx.rpgleveling.Main;
 import com.gigabytedx.rpgleveling.cooldowns.Cooldown;
+import com.gigabytedx.rpgleveling.item.AddItemToInventory;
 import com.gigabytedx.rpgleveling.item.Item;
 import com.gigabytedx.rpgleveling.item.PotionItem;
 import com.gigabytedx.rpgleveling.modifiers.Modifier;
 import com.gigabytedx.rpgleveling.shop.Shop;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+
+class RandItem {
+	
+	private double weight;
+	private String name;
+
+	RandItem(double weight, String name){
+		this.weight = weight;
+		this.name = name;
+	}
+
+	public double getWeight() {
+		return weight;
+	}
+
+	public String getName() {
+		return name;
+	}
+	
+	
+    
+}
 
 public class Interact implements Listener {
 
@@ -41,6 +69,9 @@ public class Interact implements Listener {
 	public void itemInteract(PlayerInteractEvent event) {
 		if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
 			return;
+		}
+		if(event.getClickedBlock().getType().equals(Material.CHEST)){
+			chestClickEvent(event);
 		}
 		try{
 		if(event.getPlayer().getItemInHand().getItemMeta().getDisplayName().equals(Material.STAINED_GLASS_PANE)){
@@ -91,6 +122,68 @@ public class Interact implements Listener {
 
 	}
 
+	private void chestClickEvent(PlayerInteractEvent event) {
+		event.setCancelled(true);
+		
+		Inventory finalInv = Bukkit.createInventory(event.getPlayer(), 27,ChatColor.GOLD + "TREASURE");
+		Chest chest = ((Chest) event.getClickedBlock().getState());
+		Inventory chestInv = chest.getBlockInventory();
+		Set<String> materialNames = null;
+		try{
+		materialNames = plugin.chestRollConfig.getConfigurationSection("loot").getKeys(false);
+		}catch(NullPointerException e){
+		event.getPlayer().sendMessage(ChatColor.RED + "Error with the 'chestRollFile' config for plugin: " + plugin.getName() + ". Could not find the 'loot' path.");
+		plugin.logError("Error with the 'chestRollFile' config for plugin: " + plugin.getName() + ". Could not find the 'loot' path.");
+		return;
+		}
+		List<RandItem> lootPool = new ArrayList<>();
+		
+		for(ItemStack itemInChest: chestInv.getContents()){
+			if(itemInChest == null){continue;}
+			if(materialNames.contains(itemInChest.getType().toString())){
+				Set<String> lootNames = plugin.chestRollConfig.getConfigurationSection("loot." + itemInChest.getType().toString()).getKeys(false);
+				for(String lootName: lootNames){
+					lootPool.add(new RandItem(plugin.chestRollConfig.getDouble("loot." + itemInChest.getType().toString() + "." + lootName + ".weight" ), lootName));
+				}
+				RandItem itemSelected= chooseOnWeight(lootPool);
+				String itemName = itemSelected.getName();
+				Item item = Main.itemMap.get(ChatColor.BLUE + itemName);
+				if(item == null){
+					event.getPlayer().sendMessage(ChatColor.RED + "Item with the name '" + itemName + "' could not be found in the list of items. Ensure the spelling is correct");
+					plugin.logError("Item with the name '" + itemName + "' could not be found in the list of items. Ensure the spelling is correct");
+				}else
+				finalInv.addItem(AddItemToInventory.getItemStack(item, plugin));
+			}
+		}
+		event.getPlayer().openInventory(finalInv);
+	}
+	
+	private RandItem chooseOnWeight(List<RandItem> randItems) {
+		// Compute the total weight of all items together
+		double totalWeight = 0.0d;
+		for (RandItem i : randItems)
+		{
+			if(i.getWeight() <= 0){
+				plugin.logError("Item with the name '" + i.getName() + "' has an invalid weight. Please check to see if this is an error and fix this in the chestRollFile config");
+				continue;
+			}
+		    totalWeight += i.getWeight();
+		}
+		// Now choose a random item
+		int randomIndex = -1;
+		double random = Math.random() * totalWeight;
+		for (int i = 0; i < randItems.size(); ++i)
+		{
+		    random -= randItems.get(i).getWeight();
+		    if (random <= 0.0d)
+		    {
+		        randomIndex = i;
+		        break;
+		    }
+		}
+		RandItem myRandomItem = randItems.get(randomIndex);
+		return myRandomItem;
+    }
 	@EventHandler
 	public void onHit(EntityDamageByEntityEvent event) {
 		event.setDamage(0);
@@ -208,7 +301,7 @@ public class Interact implements Listener {
 
 	}
 
-	
+	/////////////////DISABLED///////////////////
 	public void onInteract(PlayerInteractAtEntityEvent event) {
 //		if (!plugin.getConfig().getString("world name").equals(event.getPlayer().getLocation().getWorld().getName()))
 //			return;
@@ -223,5 +316,4 @@ public class Interact implements Listener {
 
 		}
 	}
-
 }

@@ -57,6 +57,9 @@ public class Main extends JavaPlugin {
 
 	public File playerFoundItemsFile = new File(getDataFolder() + "/Data/playerDataFile.yml");
 	public FileConfiguration playerFoundItemsConfig = YamlConfiguration.loadConfiguration(MobSpawningDataFile);
+	
+	public File chestRollFile = new File(getDataFolder() + "/Data/chestRollFile.yml");
+	public FileConfiguration chestRollConfig = YamlConfiguration.loadConfiguration(chestRollFile);
 
 	public static final int goldBarWorth = 10;
 	public static final int goldNuggetWorth = 1;
@@ -73,6 +76,7 @@ public class Main extends JavaPlugin {
 		itemClassValue = new ItemClassValue(this);
 		loadFiles(MobSpawningDataFile, MobSpawningData);
 		loadFiles(playerFoundItemsFile, playerFoundItemsConfig);
+		loadFiles(chestRollFile, chestRollConfig);
 		new GetMobData(this);
 
 	}

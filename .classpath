@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="C:/Users/Caleb/Desktop/Server/plugins/worldedit-bukkit-6.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Caleb/Desktop/Server/plugins/worldguard-6.1.jar"/>
 	<classpathentry kind="lib" path="Z:/Devserver/plugins/dungeonMachanics.jar"/>
+	<classpathentry kind="lib" path="Z:/Devserver/plugins/instances-1.21.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
